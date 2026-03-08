@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Officina delle Macchine — Meccanica Auto</title>
+<meta name="description" content="L'Officina delle Macchine: meccanica auto, tagliando, freni, gomme, diagnostica. Artigiani del motore dal 1987 a Reggio Emilia.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cinzel:wght@400;600;700;900&family=IM+Fell+English:ital@0;1&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --void:    #060E12;
+  --deep:    #091520;
+  --surface: #0C1E2E;
+  --panel:   #0F2436;
+  --border:  #1A3A50;
+  --gold:    #C8960C;
+  --gold2:   #E8B830;
+  --gold3:   #F5D060;
+  --goldglow: rgba(200,150,12,.25);
+  --teal:    #0AABA0;
+  --teal2:   #12CFC2;
+  --teal3:   rgba(10,171,160,.2);
+  --rust:    #B84020;
+  --rust2:   #E05030;
+  --cream:   #E8D8B0;
+  --cream2:  #C8B888;
+  --dim:     #607880;
+  --disp:  'Cinzel', serif;
+  --text:  'Playfair Display', serif;
+  --body:  'IM Fell English', serif;
+  --mono:  'Share Tech Mono', monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { background:var(--void); color:var(--cream); font-family:var(--body); overflow-x:hidden; }
+
+/* Scanlines */
+body::before {
+  content:''; position:fixed; inset:0; z-index:9998; pointer-events:none;
+  background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,.07) 3px, rgba(0,0,0,.07) 4px);
+}
+/* Vignette */
+body::after {
+  content:''; position:fixed; inset:0; z-index:9997; pointer-events:none;
+  background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(6,14,18,.6) 100%);
+}
+
+.orn {
+  display:flex; align-items:center; gap:16px; margin:20px 0;
+  color:var(--gold); font-size:.7rem; letter-spacing:.4em;
+}
+.orn::before,.orn::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(to right, transparent, var(--gold), transparent); opacity:.5;
+}
+
+/* ── MODALS ── */
+.modal-overlay { display:none; position:fixed; inset:0; z-index:2000; background:rgba(6,14,18,.95); backdrop-filter:blur(8px); overflow-y:auto; padding:80px 20px 60px; align-items:flex-start; justify-content:center; }
+.modal-overlay.open { display:flex; }
+.modal-box { background:var(--deep); border:1px solid var(--gold); border-top:4px solid var(--gold2); max-width:680px; width:100%; padding:56px 60px; position:relative; animation:mup .25s ease; box-shadow:0 0 60px rgba(200,150,12,.15), inset 0 0 40px rgba(0,0,0,.4); }
+.modal-box::before { content:''; position:absolute; inset:8px; border:1px solid rgba(200,150,12,.15); pointer-events:none; }
+@keyframes mup { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;} }
+.modal-close { position:absolute; top:20px; right:24px; background:none; border:1px solid rgba(200,150,12,.3); font-family:var(--mono); font-size:.58rem; letter-spacing:.2em; color:var(--dim); cursor:pointer; padding:6px 14px; text-transform:uppercase; transition:all .15s; }
+.modal-close:hover { border-color:var(--gold); color:var(--gold); }
+.modal-lbl { font-family:var(--mono); font-size:.56rem; letter-spacing:.3em; color:var(--teal2); text-transform:uppercase; margin-bottom:8px; }
+.modal-title { font-family:var(--disp); font-size:clamp(32px,5vw,56px); color:var(--gold3); line-height:.92; margin-bottom:16px; }
+.modal-rule { width:60px; height:2px; background:linear-gradient(to right,var(--gold),transparent); margin-bottom:24px; }
+.modal-body { font-family:var(--body); font-size:.92rem; color:var(--cream2); line-height:1.85; font-style:italic; }
+.modal-body h3 { font-family:var(--disp); font-size:.9rem; color:var(--gold2); margin:22px 0 6px; letter-spacing:.06em; font-style:normal; }
+.modal-body p { margin-bottom:10px; }
+.modal-body ul { padding-left:20px; margin-bottom:10px; }
+.modal-body li { margin-bottom:4px; }
+.modal-body strong { color:var(--cream); font-style:normal; }
+.modal-body a { color:var(--teal2); text-decoration:none; }
+.modal-body a:hover { text-decoration:underline; }
+
+/* ── COOKIE ── */
+.cookie-bar { position:fixed; bottom:0; left:0; right:0; z-index:500; background:var(--deep); border-top:2px solid var(--gold); padding:18px 56px; display:flex; align-items:center; justify-content:space-between; gap:24px; transition:transform .4s cubic-bezier(.4,0,.2,1); box-shadow:0 -4px 32px rgba(200,150,12,.12); }
+.cookie-bar.hidden { transform:translateY(110%); }
+.cookie-text { font-family:var(--body); font-size:.84rem; color:var(--cream2); line-height:1.5; font-style:italic; }
+.cookie-text a { color:var(--gold2); text-decoration:none; cursor:pointer; }
+.cookie-btns { display:flex; gap:10px; flex-shrink:0; }
+.cbtn-a { font-family:var(--mono); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--void); background:var(--gold2); border:none; padding:11px 22px; cursor:pointer; transition:background .15s; }
+.cbtn-a:hover { background:var(--gold3); }
+.cbtn-d { font-family:var(--mono); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); background:none; border:1px solid rgba(200,150,12,.25); padding:11px 22px; cursor:pointer; transition:all .15s; }
+.cbtn-d:hover { color:var(--gold); border-color:var(--gold); }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:300; height:72px; display:flex; justify-content:space-between; align-items:center; padding:0 56px; background:rgba(6,14,18,.97); border-bottom:1px solid var(--gold); backdrop-filter:blur(16px); }
+nav::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background:linear-gradient(to right, transparent, var(--gold), var(--gold2), var(--teal2), var(--gold2), var(--gold), transparent); opacity:.5; }
+.nlogo { font-family:var(--disp); font-size:1.1rem; letter-spacing:.16em; color:var(--gold2); line-height:1; text-shadow:0 0 16px rgba(200,150,12,.4); }
+.nlinks { display:flex; gap:32px; list-style:none; }
+.nlinks a { font-family:var(--mono); font-size:.6rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); text-decoration:none; transition:color .15s; }
+.nlinks a:hover { color:var(--teal2); }
+.ncta { font-family:var(--mono); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--void); background:var(--gold2); border:none; padding:0 22px; height:40px; cursor:pointer; transition:background .15s; clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px); }
+.ncta:hover { background:var(--gold3); }
+
+/* ── HERO ── */
+#hero { position:relative; min-height:100vh; padding-top:72px; display:flex; align-items:center; overflow:hidden; }
+.h-bg-img { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=1800&q=80') center/cover no-repeat; opacity:.08; filter:sepia(100%) hue-rotate(180deg) saturate(2); animation:hzoom 20s ease-in-out infinite alternate; }
+@keyframes hzoom { from{transform:scale(1.04);}to{transform:scale(1.0);} }
+.h-bg-wash { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(10,171,160,.06) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 80% 30%, rgba(200,150,12,.04) 0%, transparent 60%), linear-gradient(180deg, rgba(6,14,18,.2) 0%, rgba(6,14,18,.8) 100%); }
+.h-bands { position:absolute; top:0; left:0; right:0; height:6px; background:repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 40px, var(--gold2) 40px, var(--gold2) 44px, transparent 44px, transparent 50px, var(--teal2) 50px, var(--teal2) 52px, transparent 52px, transparent 60px); opacity:.6; }
+.h-bands-bot { position:absolute; bottom:0; left:0; right:0; height:6px; background:repeating-linear-gradient(90deg, var(--gold) 0px, var(--gold) 40px, var(--gold2) 40px, var(--gold2) 44px, transparent 44px, transparent 50px, var(--teal2) 50px, var(--teal2) 52px, transparent 52px, transparent 60px); opacity:.6; }
+.h-pillar { position:absolute; left:40px; top:72px; bottom:0; width:2px; background:linear-gradient(to bottom, transparent, var(--gold), var(--gold2), transparent); opacity:.4; }
+
+.hero-inner { position:relative; z-index:2; width:100%; padding:80px 80px 100px; display:grid; grid-template-columns:1fr 420px; gap:80px; align-items:center; }
+
+.hero-badge { display:inline-flex; align-items:center; gap:12px; font-family:var(--mono); font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--teal2); border:1px solid rgba(10,171,160,.35); padding:7px 18px; margin-bottom:32px; opacity:0; animation:up .5s .1s forwards; }
+.hero-badge::before { content:''; width:6px; height:6px; background:var(--teal2); box-shadow:0 0 8px var(--teal2); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 8px var(--teal2);}50%{opacity:.4;box-shadow:0 0 2px var(--teal2);} }
+
+.hero-title { font-family:var(--disp); font-size:clamp(68px,9.5vw,144px); line-height:.85; letter-spacing:.02em; color:var(--gold3); text-shadow:0 0 40px rgba(200,150,12,.35), 0 2px 0 rgba(0,0,0,.8), 4px 4px 0 rgba(200,150,12,.08); opacity:0; animation:up .8s .2s forwards; }
+.hero-title .teal-word { color:var(--teal2); text-shadow:0 0 40px rgba(10,171,160,.5), 0 2px 0 rgba(0,0,0,.8); display:block; }
+.hero-title .hollow { color:transparent; -webkit-text-stroke:2px var(--gold); text-shadow:none; display:block; }
+
+.h-deco-rule { display:flex; align-items:center; gap:0; margin:28px 0; height:12px; opacity:0; animation:up .5s .4s forwards; }
+.h-deco-rule span { display:block; height:2px; background:var(--gold); }
+.h-deco-rule span:nth-child(1){flex:3;}
+.h-deco-rule span:nth-child(2){flex:0 0 8px;height:8px;background:var(--gold2);margin:0 6px;}
+.h-deco-rule span:nth-child(3){flex:0 0 2px;height:12px;background:var(--gold3);margin:0 6px;}
+.h-deco-rule span:nth-child(4){flex:0 0 8px;height:8px;background:var(--gold2);margin:0 6px;}
+.h-deco-rule span:nth-child(5){flex:1;}
+
+.hero-sub { font-family:var(--body); font-size:1.05rem; font-style:italic; color:var(--cream2); line-height:1.75; max-width:500px; opacity:0; animation:up .6s .5s forwards; }
+.hero-btns { display:flex; gap:16px; margin-top:44px; opacity:0; animation:up .5s .65s forwards; }
+.btn-gold { font-family:var(--mono); font-size:.64rem; letter-spacing:.2em; text-transform:uppercase; color:var(--void); background:var(--gold2); padding:16px 36px; text-decoration:none; clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); transition:background .15s; }
+.btn-gold:hover { background:var(--gold3); }
+.btn-ghost { font-family:var(--mono); font-size:.64rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold2); background:none; padding:16px 36px; text-decoration:none; border:1px solid rgba(200,150,12,.4); transition:all .15s; }
+.btn-ghost:hover { background:rgba(200,150,12,.08); border-color:var(--gold2); }
+
+.hero-panel { border:1px solid rgba(200,150,12,.3); background:rgba(15,36,54,.7); backdrop-filter:blur(8px); position:relative; overflow:hidden; opacity:0; animation:fadein .8s .8s forwards; }
+.hero-panel::before { content:''; position:absolute; inset:4px; border:1px solid rgba(200,150,12,.1); pointer-events:none; }
+.hero-panel::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, var(--gold), var(--gold2), var(--teal2), var(--gold2), var(--gold)); }
+.hpanel-title { font-family:var(--disp); font-size:.72rem; letter-spacing:.24em; color:var(--gold2); text-align:center; padding:22px 24px 16px; border-bottom:1px solid rgba(200,150,12,.15); text-shadow:0 0 12px rgba(200,150,12,.4); }
+.hstat { display:flex; align-items:center; gap:20px; padding:20px 28px; border-bottom:1px solid rgba(200,150,12,.1); transition:background .2s; }
+.hstat:hover { background:rgba(200,150,12,.04); }
+.hstat:last-child { border-bottom:none; }
+.hstat-n { font-family:var(--disp); font-size:2.4rem; color:var(--gold3); line-height:.9; min-width:80px; text-shadow:0 0 16px rgba(200,150,12,.3); }
+.hstat-lbl { font-family:var(--mono); font-size:.54rem; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin-bottom:4px; }
+.hstat-val { font-family:var(--body); font-size:.9rem; color:var(--cream2); font-style:italic; }
+
+@keyframes up { from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;} }
+@keyframes fadein { to{opacity:1;} }
+
+/* ── BAND ── */
+.band { background:linear-gradient(90deg, var(--deep) 0%, var(--surface) 50%, var(--deep) 100%); border-top:2px solid var(--gold); border-bottom:2px solid var(--gold); padding:14px 0; overflow:hidden; position:relative; }
+.band::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--teal2), transparent); opacity:.4; }
+.band-track { display:flex; gap:40px; white-space:nowrap; animation:ticker 30s linear infinite; flex-shrink:0; }
+.band-track span { font-family:var(--disp); font-size:.7rem; letter-spacing:.28em; text-transform:uppercase; color:var(--gold2); text-shadow:0 0 10px rgba(200,150,12,.4); }
+.band-track .sep { color:var(--teal2) !important; text-shadow:0 0 8px var(--teal2) !important; }
+@keyframes ticker { from{transform:translateX(0);}to{transform:translateX(-50%);} }
+
+/* ── SECTIONS ── */
+.sec { padding:100px 80px; position:relative; }
+.sec-dark { background:var(--deep); }
+.sec-darker { background:var(--surface); }
+.sec-tag { display:inline-flex; align-items:center; gap:12px; font-family:var(--mono); font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--teal2); margin-bottom:12px; }
+.sec-tag::before { content:'◆'; font-size:.4rem; color:var(--gold2); }
+.sec-title { font-family:var(--disp); font-size:clamp(44px,6vw,88px); line-height:.88; letter-spacing:.04em; color:var(--gold3); text-shadow:0 0 30px rgba(200,150,12,.25); }
+.sec-title .ghost { color:transparent; -webkit-text-stroke:1.5px rgba(200,150,12,.2); text-shadow:none; }
+.sec-title .teal { color:var(--teal2); text-shadow:0 0 20px rgba(10,171,160,.4); }
+.sec-lead { font-family:var(--body); font-size:.95rem; font-style:italic; color:var(--cream2); line-height:1.85; }
+
+/* ── SERVICES ── */
+#svc .svc-intro { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:64px; }
+.svc-grid { display:grid; grid-template-columns:1fr 1.25fr; grid-template-rows:auto auto auto; border:1px solid rgba(200,150,12,.2); border-top:3px solid var(--gold); }
+.svc-card { padding:44px 40px; border:1px solid rgba(200,150,12,.1); position:relative; overflow:hidden; cursor:default; transition:background .25s; background:var(--panel); }
+.svc-card::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 0% 100%, rgba(10,171,160,.04) 0%, transparent 60%); pointer-events:none; }
+.svc-card:hover { background:rgba(18,36,52,.9); }
+.svc-card::after { content:''; position:absolute; top:12px; left:12px; width:20px; height:20px; border-top:1px solid rgba(200,150,12,.3); border-left:1px solid rgba(200,150,12,.3); }
+.svc-card.feat { grid-column:2; grid-row:1/span 2; background:var(--deep); border-left:3px solid var(--gold2); }
+.svc-card.feat:hover { background:rgba(9,21,32,.9); }
+.svc-card.feat .svc-name { font-size:2.4rem; color:var(--gold3); }
+.svc-card.feat .svc-desc { font-size:.95rem; color:var(--cream2); }
+.svc-card.feat::after { border-color:rgba(200,150,12,.6); width:28px; height:28px; }
+.svc-card:nth-child(1){grid-column:1;grid-row:1;}
+.svc-card:nth-child(3){grid-column:1;grid-row:2;}
+.svc-card:nth-child(4){grid-column:1;grid-row:3;}
+.svc-card:nth-child(5){grid-column:2;grid-row:3;}
+.svc-num { font-family:var(--mono); font-size:.58rem; letter-spacing:.28em; color:var(--teal2); margin-bottom:20px; text-transform:uppercase; }
+.svc-name { font-family:var(--disp); font-size:1.5rem; color:var(--gold2); line-height:1; margin-bottom:14px; letter-spacing:.06em; text-shadow:0 0 20px rgba(200,150,12,.2); }
+.svc-desc { font-family:var(--body); font-size:.88rem; font-style:italic; color:var(--cream2); line-height:1.8; }
+.svc-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:20px; }
+.svc-tag { font-family:var(--mono); font-size:.52rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); border:1px solid rgba(200,150,12,.2); padding:4px 10px; transition:all .2s; }
+.svc-card:hover .svc-tag { border-color:rgba(200,150,12,.4); color:var(--cream2); }
+.svc-underline { position:absolute; bottom:0; left:0; height:2px; width:0; background:linear-gradient(to right, var(--gold2), var(--teal2)); transition:width .35s; }
+.svc-card:hover .svc-underline { width:100%; }
+.svc-ghost-n { position:absolute; bottom:-10px; right:16px; font-family:var(--disp); font-size:7rem; color:rgba(200,150,12,.04); line-height:1; pointer-events:none; user-select:none; letter-spacing:.1em; }
+
+/* ── ABOUT ── */
+#about { display:grid; grid-template-columns:1fr 1fr; gap:0; padding:0; }
+.about-img-wrap { position:relative; min-height:680px; overflow:hidden; }
+.about-img-wrap img { width:100%; height:100%; object-fit:cover; display:block; filter:sepia(30%) hue-rotate(160deg) saturate(1.4) contrast(1.1) brightness(.7); transition:transform 8s ease; }
+#about:hover .about-img-wrap img { transform:scale(1.04); }
+.about-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(135deg, rgba(10,171,160,.15) 0%, transparent 60%), linear-gradient(to right, transparent 60%, var(--deep) 100%); }
+.about-img-wrap::after { content:''; position:absolute; top:0; left:0; bottom:0; z-index:2; width:5px; background:linear-gradient(to bottom, transparent, var(--gold2), var(--teal2), var(--gold2), transparent); }
+.about-plaque { position:absolute; bottom:40px; left:40px; z-index:3; border:2px solid var(--gold2); padding:20px 28px; background:rgba(9,21,32,.9); text-align:center; box-shadow:0 0 24px rgba(200,150,12,.25); }
+.about-plaque::before { content:''; position:absolute; inset:4px; border:1px solid rgba(200,150,12,.3); }
+.about-plaque-year { font-family:var(--disp); font-size:2.2rem; color:var(--gold3); text-shadow:0 0 16px rgba(200,150,12,.5); line-height:1; }
+.about-plaque-sub { font-family:var(--mono); font-size:.5rem; letter-spacing:.3em; text-transform:uppercase; color:var(--teal2); margin-top:4px; }
+.about-copy { background:var(--deep); padding:80px 64px; display:flex; flex-direction:column; justify-content:center; border-left:3px solid var(--gold); position:relative; }
+.about-copy::before { content:''; position:absolute; inset:20px 20px 20px 30px; border:1px solid rgba(200,150,12,.08); pointer-events:none; }
+.about-copy p { font-family:var(--body); font-size:.94rem; font-style:italic; color:var(--cream2); line-height:1.9; margin-top:20px; }
+.about-copy strong { color:var(--gold2); font-style:normal; }
+.badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:32px; }
+.badge { font-family:var(--mono); font-size:.55rem; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); border:1px solid rgba(200,150,12,.2); padding:7px 14px; clip-path:polygon(6px 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%,0 6px); transition:all .2s; }
+.badge:hover { color:var(--gold2); border-color:rgba(200,150,12,.5); background:rgba(200,150,12,.06); }
+
+/* ── NUMBERS ── */
+.num-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid rgba(200,150,12,.2); border-top:3px solid var(--gold2); margin-top:56px; }
+.num-card { padding:56px 40px; border-right:1px solid rgba(200,150,12,.1); text-align:center; position:relative; overflow:hidden; transition:background .2s; }
+.num-card:last-child { border-right:none; }
+.num-card:hover { background:rgba(200,150,12,.03); }
+.num-card::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:40px; height:2px; background:var(--gold); opacity:0; transition:opacity .2s; }
+.num-card:hover::after { opacity:1; }
+.num-val { font-family:var(--disp); font-size:clamp(3rem,4.5vw,5.5rem); color:var(--gold3); line-height:.9; text-shadow:0 0 24px rgba(200,150,12,.35); }
+.num-label { font-family:var(--body); font-size:.95rem; font-style:italic; color:var(--cream2); margin-top:14px; line-height:1.4; }
+.num-desc { font-family:var(--mono); font-size:.54rem; letter-spacing:.18em; text-transform:uppercase; color:var(--dim); margin-top:6px; }
+
+/* ── PROCESS ── */
+.proc-head { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:60px; }
+.proc-list { border-top:1px solid rgba(200,150,12,.2); }
+.proc-row { display:grid; grid-template-columns:90px 1fr; border-bottom:1px solid rgba(200,150,12,.1); transition:background .2s; }
+.proc-row:hover { background:rgba(200,150,12,.03); }
+.proc-n { font-family:var(--disp); font-size:2.6rem; color:var(--gold2); padding:36px 0; border-right:1px solid rgba(200,150,12,.15); display:flex; align-items:center; justify-content:center; text-shadow:0 0 16px rgba(200,150,12,.3); }
+.proc-body { padding:36px 44px; }
+.proc-title { font-family:var(--disp); font-size:1.5rem; color:var(--gold3); letter-spacing:.08em; margin-bottom:10px; text-shadow:0 0 16px rgba(200,150,12,.2); }
+.proc-desc { font-family:var(--body); font-size:.88rem; font-style:italic; color:var(--cream2); line-height:1.8; max-width:560px; }
+
+/* ── REVIEWS ── */
+.rev-head { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; margin-bottom:60px; }
+.rev-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid rgba(200,150,12,.15); border-top:3px solid var(--gold); }
+.rev-card { padding:48px 40px; border-right:1px solid rgba(200,150,12,.1); transition:background .2s; position:relative; overflow:hidden; }
+.rev-card:last-child { border-right:none; }
+.rev-card:hover { background:rgba(200,150,12,.03); }
+.rev-card::before { content:'"'; position:absolute; top:16px; right:24px; font-family:var(--disp); font-size:5rem; color:rgba(200,150,12,.07); line-height:1; }
+.stars { color:var(--gold2); letter-spacing:3px; font-size:.9rem; margin-bottom:20px; text-shadow:0 0 8px rgba(200,150,12,.3); }
+.rev-text { font-family:var(--body); font-size:.9rem; font-style:italic; color:var(--cream2); line-height:1.85; margin-bottom:28px; }
+.rev-line { width:36px; height:1px; background:linear-gradient(to right, var(--gold2), transparent); margin-bottom:16px; }
+.rev-name { font-family:var(--disp); font-size:.8rem; color:var(--gold2); letter-spacing:.1em; }
+.rev-role { font-family:var(--mono); font-size:.54rem; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-top:4px; }
+
+/* ── CONTACT ── */
+#contact { display:grid; grid-template-columns:1fr 1fr; padding:0; }
+.ct-left { background:var(--void); padding:80px 64px; border-right:3px solid var(--gold); position:relative; }
+.ct-left::before { content:''; position:absolute; inset:20px 20px 20px 24px; border:1px solid rgba(200,150,12,.06); pointer-events:none; }
+.ct-left p { font-family:var(--body); font-size:.93rem; font-style:italic; color:var(--cream2); line-height:1.85; max-width:360px; margin-top:20px; }
+.ct-info { margin-top:48px; }
+.ct-row { padding:18px 0; border-bottom:1px solid rgba(200,150,12,.1); }
+.ct-row:first-child { border-top:1px solid rgba(200,150,12,.1); }
+.ct-lbl { font-family:var(--mono); font-size:.54rem; letter-spacing:.26em; text-transform:uppercase; color:var(--teal2); margin-bottom:5px; }
+.ct-val { font-family:var(--body); font-size:.93rem; font-style:italic; color:var(--cream); line-height:1.5; }
+.ct-val a { color:var(--cream); text-decoration:none; border-bottom:1px solid rgba(200,150,12,.3); transition:color .15s; }
+.ct-val a:hover { color:var(--gold2); }
+.ct-right { background:var(--panel); padding:80px 64px; }
+.fl { display:block; font-family:var(--mono); font-size:.55rem; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:7px; }
+.fi,.fta { width:100%; background:rgba(9,21,32,.8); border:1px solid rgba(200,150,12,.2); border-left:3px solid transparent; padding:13px 16px; color:var(--cream); font-family:var(--body); font-size:.93rem; font-style:italic; outline:none; margin-bottom:20px; transition:all .2s; }
+.fi:focus,.fta:focus { background:rgba(9,21,32,.95); border-color:rgba(200,150,12,.3); border-left-color:var(--gold2); box-shadow:0 0 16px rgba(200,150,12,.08); }
+.fta { resize:vertical; min-height:120px; }
+.fsub { width:100%; font-family:var(--mono); font-size:.64rem; letter-spacing:.22em; text-transform:uppercase; color:var(--void); background:var(--gold2); border:none; padding:17px; cursor:pointer; transition:background .15s; clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px); }
+.fsub:hover { background:var(--gold3); }
+
+/* ── FOOTER ── */
+footer { background:var(--void); border-top:1px solid rgba(200,150,12,.2); padding:32px 80px; display:flex; justify-content:space-between; align-items:center; position:relative; }
+footer::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(to right, transparent, var(--gold), var(--gold2), var(--teal2), var(--gold2), var(--gold), transparent); opacity:.6; }
+.flogo { font-family:var(--disp); font-size:1.1rem; letter-spacing:.14em; color:var(--gold2); text-shadow:0 0 12px rgba(200,150,12,.3); }
+.flogo em { color:var(--teal2); font-style:normal; }
+.fcopy { font-family:var(--mono); font-size:.52rem; letter-spacing:.14em; color:var(--dim); text-align:center; line-height:1.9; }
+.fnav { display:flex; gap:24px; }
+.fnav a { font-family:var(--mono); font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); text-decoration:none; cursor:pointer; transition:color .15s; }
+.fnav a:hover { color:var(--gold2); }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(14px); transition:opacity .6s, transform .6s; }
+.rv.in { opacity:1; transform:none; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px) {
+  nav { padding:0 20px; }
+  .nlinks { display:none; }
+  .sec { padding:60px 20px; }
+  .hero-inner { grid-template-columns:1fr; padding:40px 20px 60px; }
+  .hero-panel { display:none; }
+  #svc .svc-intro { grid-template-columns:1fr; gap:24px; }
+  .svc-grid { grid-template-columns:1fr; }
+  .svc-card.feat { grid-column:1; grid-row:auto; }
+  .svc-card:nth-child(1),.svc-card:nth-child(3),.svc-card:nth-child(4),.svc-card:nth-child(5) { grid-column:1; grid-row:auto; }
+  #about { grid-template-columns:1fr; }
+  .about-img-wrap { min-height:280px; }
+  .about-copy { padding:48px 20px; border-left:none; border-top:3px solid var(--gold); }
+  .about-copy::before { display:none; }
+  .num-grid { grid-template-columns:1fr 1fr; }
+  .proc-head { grid-template-columns:1fr; gap:20px; }
+  .rev-head { grid-template-columns:1fr; gap:20px; }
+  .rev-grid { grid-template-columns:1fr; }
+  .rev-card { border-right:none; border-bottom:1px solid rgba(200,150,12,.1); }
+  #contact { grid-template-columns:1fr; }
+  .ct-left,.ct-right { padding:48px 20px; }
+  .ct-left::before { display:none; }
+  footer { flex-direction:column; gap:16px; padding:20px; text-align:center; }
+  .cookie-bar { padding:16px 20px; flex-direction:column; align-items:flex-start; }
+  .modal-box { padding:36px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-privacy">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-privacy')">✕ Chiudi</button>
+    <div class="modal-lbl">Informativa Legale</div>
+    <div class="modal-title">PRIVACY<br>POLICY</div>
+    <div class="modal-rule"></div>
+    <div class="modal-body">
+      <p>L'Officina delle Macchine è titolare del trattamento dei dati personali in conformità al <strong>Regolamento UE 2016/679 (GDPR)</strong>.</p>
+      <h3>DATI RACCOLTI</h3>
+      <p>Raccogliamo esclusivamente i dati forniti volontariamente tramite il modulo di contatto.</p>
+      <h3>FINALITÀ</h3>
+      <ul><li>Rispondere alle richieste di preventivo</li><li>Gestire appuntamenti e interventi</li><li>Adempiere agli obblighi di legge</li></ul>
+      <h3>CONSERVAZIONE</h3>
+      <p>I dati vengono conservati non oltre <strong>5 anni</strong>.</p>
+      <h3>I TUOI DIRITTI</h3>
+      <p>Accesso, rettifica e cancellazione: <a href="mailto:info@officinadellemacchine.it">info@officinadellemacchine.it</a></p>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-cookie">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-cookie')">✕ Chiudi</button>
+    <div class="modal-lbl">Informativa Legale</div>
+    <div class="modal-title">COOKIE<br>POLICY</div>
+    <div class="modal-rule"></div>
+    <div class="modal-body">
+      <p>Questo sito utilizza cookie tecnici necessari in conformità alla <strong>Direttiva ePrivacy</strong> e al GDPR.</p>
+      <h3>COOKIE TECNICI</h3><p>Necessari al funzionamento, non richiedono consenso.</p>
+      <h3>COOKIE ANALITICI</h3><p>Utilizzati in forma anonima solo con il tuo consenso.</p>
+      <h3>GESTIONE</h3><p>Revoca: <a href="mailto:info@officinadellemacchine.it">info@officinadellemacchine.it</a></p>
+    </div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-legal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-legal')">✕ Chiudi</button>
+    <div class="modal-lbl">Informativa Legale</div>
+    <div class="modal-title">NOTE<br>LEGALI</div>
+    <div class="modal-rule"></div>
+    <div class="modal-body">
+      <h3>TITOLARE</h3>
+      <p><strong>L'Officina delle Macchine</strong><br>Via Roma 12 — 42121 Reggio Emilia · P.IVA: IT 01234567890</p>
+      <h3>PROPRIETÀ INTELLETTUALE</h3>
+      <p>Tutti i contenuti sono di proprietà dell'Officina. Vietata la riproduzione senza autorizzazione scritta.</p>
+      <h3>LEGGE APPLICABILE</h3>
+      <p>Foro competente esclusivo: <strong>Tribunale di Reggio Emilia</strong>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-bar" id="cookie-bar">
+  <div class="cookie-text">Utilizziamo cookie tecnici per il funzionamento del sito. Leggi la <a onclick="openModal('modal-cookie')">Cookie Policy</a> e la <a onclick="openModal('modal-privacy')">Privacy Policy</a>.</div>
+  <div class="cookie-btns">
+    <button class="cbtn-d" onclick="dismissCookies()">Solo necessari</button>
+    <button class="cbtn-a" onclick="acceptCookies()">Accetta tutti</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nlogo">L'OFFICINA DELLE MACCHINE</div>
+  <ul class="nlinks">
+    <li><a href="#svc">Servizi</a></li>
+    <li><a href="#about">Chi Siamo</a></li>
+    <li><a href="#process">Come Lavoriamo</a></li>
+    <li><a href="#reviews">Recensioni</a></li>
+    <li><a href="#contact">Contatti</a></li>
+  </ul>
+  <button class="ncta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Prenota Intervento</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="h-bg-img"></div>
+  <div class="h-bg-wash"></div>
+  <div class="h-bands"></div>
+  <div class="h-bands-bot"></div>
+  <div class="h-pillar"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">Fondati nel 1987 &nbsp;·&nbsp; Reggio Emilia &nbsp;·&nbsp; Meccanica Certificata</div>
+      <h1 class="hero-title">
+        LA TUA<br>AUTO.<br>
+        <span class="teal-word">CURATA.</span>
+        <span class="hollow">GARANTITA.</span>
+      </h1>
+      <div class="h-deco-rule"><span></span><span></span><span></span><span></span><span></span></div>
+      <p class="hero-sub">Meccanica generale, tagliando, freni, gomme e diagnostica elettronica. Trentacinque anni di arte meccanica sulle strade dell'Emilia. Ogni intervento eseguito con cura, precisione e rispetto del vostro veicolo.</p>
+      <div class="hero-btns">
+        <a href="#svc" class="btn-gold">Scopri i Servizi</a>
+        <a href="#about" class="btn-ghost">Chi Siamo</a>
+      </div>
+    </div>
+    <div class="hero-panel rv">
+      <div class="hpanel-title">◆ &nbsp; SCHEDA OFFICINA &nbsp; ◆</div>
+      <div class="hstat"><div class="hstat-n">35+</div><div><div class="hstat-lbl">Anni di attività</div><div class="hstat-val">Fondati nel 1987, Reggio Emilia</div></div></div>
+      <div class="hstat"><div class="hstat-n">All</div><div><div class="hstat-lbl">Marchi trattati</div><div class="hstat-val">Italiane, tedesche, asiatiche</div></div></div>
+      <div class="hstat"><div class="hstat-n">4.9</div><div><div class="hstat-lbl">Stelle su Google</div><div class="hstat-val">320+ recensioni verificate</div></div></div>
+      <div class="hstat"><div class="hstat-n">H24</div><div><div class="hstat-lbl">Risposta preventivo</div><div class="hstat-val">Rispondiamo entro la giornata</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BAND -->
+<div class="band">
+  <div class="band-track">
+    <span>TAGLIANDO</span><span class="sep">◆</span><span>FRENI &amp; FRIZIONE</span><span class="sep">◆</span><span>GOMME &amp; ASSETTO</span><span class="sep">◆</span><span>DIAGNOSTICA ELETTRONICA</span><span class="sep">◆</span><span>CARROZZERIA</span><span class="sep">◆</span><span>REVISIONE AUTO</span><span class="sep">◆</span><span>CAMBIO &amp; TRASMISSIONE</span><span class="sep">◆</span><span>ARIA CONDIZIONATA</span><span class="sep">◆</span>
+    <span>TAGLIANDO</span><span class="sep">◆</span><span>FRENI &amp; FRIZIONE</span><span class="sep">◆</span><span>GOMME &amp; ASSETTO</span><span class="sep">◆</span><span>DIAGNOSTICA ELETTRONICA</span><span class="sep">◆</span><span>CARROZZERIA</span><span class="sep">◆</span><span>REVISIONE AUTO</span><span class="sep">◆</span><span>CAMBIO &amp; TRASMISSIONE</span><span class="sep">◆</span><span>ARIA CONDIZIONATA</span><span class="sep">◆</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="svc" class="sec sec-dark">
+  <div class="svc-intro rv">
+    <div>
+      <div class="sec-tag">Servizi</div>
+      <h2 class="sec-title">COSA<br>SAPPIAMO<br><span class="teal">FARE</span></h2>
+    </div>
+    <div>
+      <p class="sec-lead">Ogni intervento viene eseguito con strumentazione diagnostica di ultima generazione e ricambi originali o equivalenti certificati. L'officina è il luogo dove la competenza incontra la passione per il motore.</p>
+      <div class="orn">◆ ◆ ◆</div>
+      <a href="#contact" class="btn-gold">Prenota Adesso</a>
+    </div>
+  </div>
+  <div class="svc-grid rv">
+    <div class="svc-card">
+      <div class="svc-underline"></div>
+      <div class="svc-num">· 01 ·</div>
+      <div class="svc-name">Tagliando &amp;<br>Manutenzione</div>
+      <p class="svc-desc">Cambio olio e filtri, verifica cinghia distribuzione, controllo livelli e stato generale. Il tagliando rispettato è la forma più nobile di rispetto per il proprio veicolo.</p>
+      <div class="svc-tags"><span class="svc-tag">Olio</span><span class="svc-tag">Filtri</span><span class="svc-tag">Distribuzione</span></div>
+      <div class="svc-ghost-n">01</div>
+    </div>
+    <div class="svc-card feat">
+      <div class="svc-underline"></div>
+      <div class="svc-num">· 02 ·</div>
+      <div class="svc-name">Diagnostica<br>Elettronica</div>
+      <p class="svc-desc">Lettura centraline, reset segnalazioni e diagnosi avanzata su tutti i sistemi elettronici. Dalla spia del motore al controllo ESP: nessun errore rimane senza risposta.</p>
+      <div class="orn" style="margin:24px 0 16px; opacity:.4;">— — —</div>
+      <p class="svc-desc">Utilizziamo scanner professionali multi-marca aggiornati alle ultime versioni software. Ogni diagnosi viene documentata e condivisa con il cliente prima di procedere.</p>
+      <div class="svc-tags" style="margin-top:24px;"><span class="svc-tag">OBD Multi-Marca</span><span class="svc-tag">Centraline</span><span class="svc-tag">ESP &amp; ABS</span></div>
+      <div class="svc-ghost-n">02</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-underline"></div>
+      <div class="svc-num">· 03 ·</div>
+      <div class="svc-name">Freni &amp;<br>Frizione</div>
+      <p class="svc-desc">Sostituzione pastiglie, dischi, tamburi e kit frizione. Spurgo impianto frenante. Interventi rapidi con garanzia scritta sul lavoro eseguito.</p>
+      <div class="svc-tags"><span class="svc-tag">Dischi</span><span class="svc-tag">Pastiglie</span><span class="svc-tag">Frizione</span></div>
+      <div class="svc-ghost-n">03</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-underline"></div>
+      <div class="svc-num">· 04 ·</div>
+      <div class="svc-name">Gomme &amp;<br>Geometria</div>
+      <p class="svc-desc">Montaggio, bilanciatura e stoccaggio pneumatici. Convergenza e assetto su banco 3D. Pneumatici estivi, invernali e quattro stagioni.</p>
+      <div class="svc-tags"><span class="svc-tag">Montaggio</span><span class="svc-tag">Equilibratura</span><span class="svc-tag">Assetto 3D</span></div>
+      <div class="svc-ghost-n">04</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-underline"></div>
+      <div class="svc-num">· 05 ·</div>
+      <div class="svc-name">Carrozzeria &amp;<br>Verniciatura</div>
+      <p class="svc-desc">Riparazioni da ammaccature a danni strutturali. Verniciatura a cabina con campionatura colore millimetrica. Auto sostitutiva disponibile su richiesta.</p>
+      <div class="svc-tags"><span class="svc-tag">Riparazioni</span><span class="svc-tag">Verniciatura</span><span class="svc-tag">Auto Sostitutiva</span></div>
+      <div class="svc-ghost-n">05</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:0; display:grid; grid-template-columns:1fr 1fr;">
+  <div class="about-img-wrap rv">
+    <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?w=900&q=80" alt="Meccanico al lavoro in officina">
+    <div class="about-plaque">
+      <div class="about-plaque-year">1987</div>
+      <div class="about-plaque-sub">Anno di fondazione</div>
+    </div>
+  </div>
+  <div class="about-copy rv">
+    <div class="sec-tag">Chi Siamo</div>
+    <h2 class="sec-title">IN OFFICINA.<br>CON<br><span class="teal">PASSIONE.</span></h2>
+    <div class="orn">◆ ◆ ◆</div>
+    <p>Siamo un'officina a conduzione familiare nata a <strong>Reggio Emilia nel 1987</strong>. Tre generazioni di meccanici che hanno visto passare ogni tipo di automobile, dalle utilitarie storiche ai moderni veicoli ibridi.</p>
+    <p>La nostra filosofia è semplice: <strong>lavoriamo come se fosse la nostra auto</strong>. Spieghiamo ogni intervento prima di eseguirlo, utilizziamo solo ricambi certificati e non eseguiamo mai il lavoro che non è davvero necessario.</p>
+    <p>I prezzi sono chiari e i tempi vengono rispettati. <strong>Quando diciamo che l'auto è pronta alle cinque, la trovate pronta alle cinque.</strong></p>
+    <div class="badges">
+      <span class="badge">Meccanica Generale</span>
+      <span class="badge">Diagnostica Multi-Marca</span>
+      <span class="badge">Gomme Certificato</span>
+      <span class="badge">Carrozzeria Autorizzata</span>
+      <span class="badge">Auto Sostitutiva</span>
+      <span class="badge">Preventivo Gratuito</span>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="sec sec-darker">
+  <div class="rv" style="text-align:center; max-width:600px; margin:0 auto;">
+    <div class="sec-tag" style="justify-content:center;">Numeri</div>
+    <h2 class="sec-title" style="text-align:center;">IN <span class="ghost">NUMERI</span></h2>
+    <div class="orn">◆ ◆ ◆</div>
+  </div>
+  <div class="num-grid rv">
+    <div class="num-card"><div class="num-val">35+</div><div class="num-label">Anni di attività</div><div class="num-desc">Fondati nel 1987</div></div>
+    <div class="num-card"><div class="num-val">800+</div><div class="num-label">Interventi all'anno</div><div class="num-desc">Veicoli revisionati</div></div>
+    <div class="num-card"><div class="num-val">4.9</div><div class="num-label">Stelle su Google</div><div class="num-desc">320+ recensioni</div></div>
+    <div class="num-card"><div class="num-val">€ 0</div><div class="num-label">Sorprese in bolletta</div><div class="num-desc">Preventivo sempre gratuito</div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="sec sec-dark">
+  <div class="proc-head rv">
+    <div>
+      <div class="sec-tag">Come Lavoriamo</div>
+      <h2 class="sec-title">IL<br><span class="teal">PROCESSO</span></h2>
+    </div>
+    <p class="sec-lead">Ogni intervento segue un iter trasparente e rigoroso. Dal momento in cui portate l'auto fino al ritiro: nessuna sorpresa, solo risultati garantiti per iscritto.</p>
+  </div>
+  <div class="proc-list rv">
+    <div class="proc-row"><div class="proc-n">01</div><div class="proc-body"><div class="proc-title">ACCETTAZIONE</div><p class="proc-desc">Ascoltiamo il cliente e analizziamo il veicolo. Raccogliamo la storia dell'automobile e i sintomi segnalati prima di procedere con qualsiasi operazione.</p></div></div>
+    <div class="proc-row"><div class="proc-n">02</div><div class="proc-body"><div class="proc-title">DIAGNOSI</div><p class="proc-desc">Ispezione visiva e diagnostica elettronica avanzata. Identifichiamo la causa reale del problema, non i meri sintomi superficiali.</p></div></div>
+    <div class="proc-row"><div class="proc-n">03</div><div class="proc-body"><div class="proc-title">PREVENTIVO</div><p class="proc-desc">Vi presentiamo il preventivo dettagliato prima di iniziare qualsiasi lavoro. Spieghiamo cosa va fatto, perché e quanto costa. La decisione finale spetta sempre a voi.</p></div></div>
+    <div class="proc-row"><div class="proc-n">04</div><div class="proc-body"><div class="proc-title">INTERVENTO</div><p class="proc-desc">Eseguiamo il lavoro con ricambi originali o equivalenti certificati, secondo le procedure indicate dai costruttori. Qualità senza compromessi.</p></div></div>
+    <div class="proc-row"><div class="proc-n">05</div><div class="proc-body"><div class="proc-title">COLLAUDO E CONSEGNA</div><p class="proc-desc">Test finale su strada e verifica di ogni sistema. L'automobile viene consegnata con il resoconto scritto degli interventi eseguiti e la garanzia sul lavoro svolto.</p></div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="sec sec-darker">
+  <div class="rev-head rv">
+    <div>
+      <div class="sec-tag">Clienti</div>
+      <h2 class="sec-title">LO DICONO<br><span class="ghost">LORO</span></h2>
+    </div>
+    <p class="sec-lead">Lavoriamo da trentacinque anni sulla fiducia. I nostri clienti ci portano i figli e i nipoti. Ecco alcune delle loro parole.</p>
+  </div>
+  <div class="rev-grid rv">
+    <div class="rev-card"><div class="stars">★★★★★</div><p class="rev-text">Finalmente un'officina che ti spiega cosa fa e perché. Ho portato la mia Golf con la spia del motore accesa — hanno trovato il problema in venti minuti. Onesti e veloci come pochi.</p><div class="rev-line"></div><div class="rev-name">Luca Bergamini</div><div class="rev-role">Cliente da 8 anni · Reggio Emilia</div></div>
+    <div class="rev-card"><div class="stars">★★★★★</div><p class="rev-text">Mi hanno riparato la carrozzeria dopo un tamponamento. Il colore è venuto perfetto, non si vede assolutamente nulla. Tempi rispettati al giorno. Li consiglio a chiunque.</p><div class="rev-line"></div><div class="rev-name">Alessia Moretti</div><div class="rev-role">Cliente · Scandiano (RE)</div></div>
+    <div class="rev-card"><div class="stars">★★★★★</div><p class="rev-text">Tagliando e cambio gomme invernali. Prezzi giusti, lavoro fatto bene, nessuna sorpresa in bolletta. L'auto era pronta come promesso. Ci torno da vent'anni e non cambio.</p><div class="rev-line"></div><div class="rev-name">Roberto Zanni</div><div class="rev-role">Cliente storico · Reggio Emilia</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:0; display:grid; grid-template-columns:1fr 1fr;">
+  <div class="ct-left rv">
+    <div class="sec-tag">Contatti</div>
+    <h2 class="sec-title">PORTA<br>LA TUA<br><span class="teal">AUTO.</span></h2>
+    <div class="orn">◆ ◆ ◆</div>
+    <p>Siamo in Via Roma a Reggio Emilia, a cinque minuti dal centro. Prenotate un appuntamento o passate direttamente in officina: vi accogliamo senza attesa e senza formalità.</p>
+    <div class="ct-info">
+      <div class="ct-row"><div class="ct-lbl">Indirizzo</div><div class="ct-val">Via Roma 12 — 42121 Reggio Emilia</div></div>
+      <div class="ct-row"><div class="ct-lbl">Telefono &amp; WhatsApp</div><div class="ct-val"><a href="tel:+390522000000">0522 000 000</a></div></div>
+      <div class="ct-row"><div class="ct-lbl">Email</div><div class="ct-val"><a href="mailto:info@officinadellemacchine.it">info@officinadellemacchine.it</a></div></div>
+      <div class="ct-row"><div class="ct-lbl">Orari di apertura</div><div class="ct-val">Lunedì – Venerdì: 8:00 – 18:30<br>Sabato: 8:00 – 12:30</div></div>
+    </div>
+  </div>
+  <div class="ct-right rv">
+    <div class="sec-tag">Preventivo Gratuito</div>
+    <h2 class="sec-title" style="font-size:clamp(36px,4vw,64px); margin-bottom:32px;">SCRIVETECI<br>SUBITO</h2>
+    <div class="orn" style="margin-bottom:28px;">◆ ◆ ◆</div>
+    <label class="fl">Nome e Cognome</label>
+    <input type="text" class="fi" placeholder="Mario Rossi">
+    <label class="fl">Veicolo (marca, modello, anno)</label>
+    <input type="text" class="fi" placeholder="es. Volkswagen Golf 2019 · 1.6 TDI">
+    <label class="fl">Tipo di intervento</label>
+    <input type="text" class="fi" placeholder="Tagliando / Freni / Diagnostica / Altro...">
+    <label class="fl">Messaggio</label>
+    <textarea class="fta" placeholder="Descrivete il problema o l'intervento richiesto..."></textarea>
+    <button class="fsub" id="fsub">Invia Richiesta Preventivo</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">L'OFFICINA <em>DELLE MACCHINE</em></div>
+  <div class="fcopy">© 2026 L'Officina delle Macchine — Via Roma 12, Reggio Emilia<br>P.IVA 01234567890 &nbsp;◆&nbsp; Meccanica Generale e Carrozzeria</div>
+  <nav class="fnav">
+    <a onclick="openModal('modal-privacy')">Privacy</a>
+    <a onclick="openModal('modal-cookie')">Cookie</a>
+    <a onclick="openModal('modal-legal')">Note Legali</a>
+  </nav>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 55); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+setTimeout(() => document.querySelectorAll('.rv:not(.in)').forEach(el => el.classList.add('in')), 1500);
+document.getElementById('fsub').addEventListener('click', function() {
+  this.textContent = 'RICHIESTA INVIATA ✓';
+  this.style.background = '#1a6040';
+  this.disabled = true;
+});
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.modal-overlay').forEach(o => { o.addEventListener('click', function(e) { if (e.target === this) closeModal(this.id); }); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => closeModal(m.id)); });
+function acceptCookies() { document.getElementById('cookie-bar').classList.add('hidden'); }
+function dismissCookies() { document.getElementById('cookie-bar').classList.add('hidden'); }
+</script>
+</body>
+</html>
