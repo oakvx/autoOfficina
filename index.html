@@ -259,13 +259,8 @@
         }
 
         @keyframes heroZoom {
-            from {
-                transform: scale(1.04);
-            }
-
-            to {
-                transform: scale(1.0);
-            }
+            from { transform: scale(1.04); }
+            to { transform: scale(1.0); }
         }
 
         .hero-overlay {
@@ -535,13 +530,8 @@
             overflow: hidden;
         }
 
-        .manifesto-line {
-            display: none;
-        }
-
-        .manifesto-line.show {
-            height: 0;
-        }
+        .manifesto-line { display: none; }
+        .manifesto-line.show { height: 0; }
 
         .manifesto-lead {
             font-family: 'Syne', sans-serif;
@@ -621,13 +611,8 @@
         }
 
         @keyframes marquee {
-            from {
-                transform: translateX(0)
-            }
-
-            to {
-                transform: translateX(-50%)
-            }
+            from { transform: translateX(0) }
+            to { transform: translateX(-50%) }
         }
 
         .strip-item {
@@ -1074,13 +1059,8 @@
             margin-bottom: 1.8rem;
         }
 
-        .rev-body::before {
-            content: '\2018';
-        }
-
-        .rev-body::after {
-            content: '\2019';
-        }
+        .rev-body::before { content: '\2018'; }
+        .rev-body::after { content: '\2019'; }
 
         .rev-author {
             font-family: 'Oxanium', sans-serif;
@@ -1136,95 +1116,7 @@
             transform: translateX(4px);
         }
 
-        /* GALLERY */
-        #galleria {
-            background: var(--void);
-            padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
-            border-top: 1px solid var(--rule-lt);
-        }
-
-        .gal-layout {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            grid-template-rows: 280px 280px;
-            gap: 2px;
-            margin-top: 3.5rem;
-        }
-
-        .gal-cell {
-            background: var(--panel);
-            border: 1px solid var(--rule-lt);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-            padding: 1.5rem;
-            opacity: 0;
-            transition: opacity .7s var(--ease-out), border-color .5s;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            box-shadow: 0 0 0 1px rgba(44, 255, 133, .04) inset;
-        }
-
-        .gal-cell.show {
-            opacity: 1;
-        }
-
-        .gal-cell:nth-child(1) {
-            grid-row: span 2;
-            background-image: linear-gradient(to top, rgba(3, 8, 6, .88) 0%, rgba(3, 8, 6, .16) 55%), url('https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&fm=jpg&q=80&w=1400');
-        }
-
-        .gal-cell:nth-child(2) {
-            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1637640125496-31852f042a60?auto=format&fit=crop&fm=jpg&q=80&w=1000');
-        }
-
-        .gal-cell:nth-child(3) {
-            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1593699199342-59b40e08f0ac?auto=format&fit=crop&fm=jpg&q=80&w=1000');
-        }
-
-        .gal-cell:nth-child(4) {
-            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1596986952526-3be237187071?auto=format&fit=crop&fm=jpg&q=80&w=1000');
-        }
-
-        .gal-cell:nth-child(5) {
-            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1617898529288-7f3efcf8e299?auto=format&fit=crop&fm=jpg&q=80&w=1000');
-        }
-
-        .gal-cell:hover {
-            border-color: rgba(44, 255, 133, .4);
-        }
-
-        .gal-cell::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%), repeating-linear-gradient(135deg, transparent, transparent 32px, rgba(255, 255, 255, .01) 32px, rgba(255, 255, 255, .01) 33px);
-        }
-
-        .gal-cell::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(3, 8, 6, .9) 0%, transparent 40%);
-        }
-
-        .gal-lbl {
-            position: relative;
-            z-index: 1;
-            font-family: 'Oxanium', sans-serif;
-            font-weight: 300;
-            font-size: .5rem;
-            letter-spacing: .3em;
-            text-transform: uppercase;
-            color: rgba(217, 255, 234, .46);
-            transition: color .3s;
-        }
-
-        .gal-cell:hover .gal-lbl {
-            color: var(--cream);
-        }
+        
 
         /* CHI SIAMO */
         #chi {
@@ -1655,8 +1547,7 @@
             background: linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%), repeating-linear-gradient(135deg, transparent, transparent 32px, rgba(255, 255, 255, .008) 32px, rgba(255, 255, 255, .008) 33px);
         }
 
-        .map-block p,
-        .map-block a {
+        .map-block p, .map-block a {
             position: relative;
             z-index: 1;
         }
@@ -1687,8 +1578,6 @@
             color: var(--parch);
             border-color: var(--gold);
         }
-
-        .form-panel {}
 
         .form-title {
             font-family: 'Syne', sans-serif;
@@ -1925,6 +1814,24 @@
             color: var(--dim);
         }
 
+        .ft-made {
+            font-family: 'Oxanium', sans-serif;
+            font-weight: 300;
+            font-size: .5rem;
+            letter-spacing: .15em;
+            color: var(--dim);
+        }
+
+        .ft-made a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color .3s;
+        }
+
+        .ft-made a:hover {
+            color: var(--gold-lt);
+        }
+
         .ft-legal {
             display: flex;
             gap: 2rem;
@@ -2034,125 +1941,126 @@
             opacity: 1;
         }
 
-        /* RESPONSIVE */
-        @media(max-width:1000px) {
-
+        /* RESPONSIVE — tablet 1024 */
+        @media(max-width:1024px) {
             .approccio-grid,
             .chi-layout,
             .faq-layout,
-            .cnt-layout {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-
-            #numbers {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .rev-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .ft-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .nav-center {
-                display: none;
-            }
-
-            .nav-mob {
-                display: block;
-            }
-
-            .nav-tel {
-                display: none;
-            }
-
-            .fg-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .svc-card {
-                width: clamp(260px, 80vw, 340px);
-            }
-
-            .hero-badge {
-                top: auto;
-                bottom: 7rem;
-                right: 1.5rem;
-                align-items: flex-end;
-            }
+            .cnt-layout { grid-template-columns: 1fr; gap: 3rem; }
+            #numbers { grid-template-columns: 1fr 1fr; }
+            .rev-grid { grid-template-columns: 1fr 1fr; }
+            .ft-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+            .nav-center { display: none; }
+            .nav-mob { display: block; }
+            .nav-tel { display: none; }
+            .fg-row { grid-template-columns: 1fr; gap: 0; }
+            .svc-card { width: clamp(280px, 75vw, 360px); }
+            .hero-badge { top: auto; bottom: 7rem; right: 1.5rem; align-items: flex-end; }
+            .svc-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .band-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); }
         }
 
+        /* RESPONSIVE — mobile 640 */
         @media(max-width:640px) {
-            #numbers {
-                grid-template-columns: 1fr 1fr;
-            }
+            nav { padding: 0 1.2rem; height: 60px; }
+            #c-dot, #c-ring { display: none; }
 
-            .num-block {
-                padding: 1.5rem;
-            }
+            #hero { min-height: 100svh; }
+            .hero-content { padding: 1.5rem 1.2rem; padding-bottom: clamp(10rem, 22vw, 16rem); }
+            .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
+            .hero-eyebrow { font-size: .46rem; letter-spacing: .2em; margin-bottom: 1.5rem; }
+            .hero-desc { font-size: .8rem; margin-top: 1.5rem; max-width: 100%; }
+            .hero-ctas { margin-top: 2rem; gap: 1.2rem; flex-wrap: wrap; }
+            .btn-hero { padding: .75rem 1.8rem; font-size: .5rem; }
+            .hero-badge { display: none; }
 
-            .rev-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero-stats { flex-wrap: wrap; }
+            .h-stat { flex: 0 0 50%; padding: 1rem 1.2rem; border-bottom: 1px solid var(--rule-lt); }
+            .h-stat:nth-child(even) { border-right: none; }
+            .h-stat-n { font-size: 1.5rem; }
+            .h-stat-l { font-size: .4rem; }
 
-            .ft-grid {
-                grid-template-columns: 1fr;
-            }
+            #manifesto { padding: 3.5rem 1.2rem; min-height: auto; }
+            .manifesto-lead { font-size: .95rem; }
+            .manifesto-text { font-size: clamp(1.2rem, 5vw, 1.6rem); }
 
-            .gal-layout {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;
-            }
+            .strip-item { padding: 0 1.5rem; font-size: .46rem; gap: 1rem; }
 
-            .gal-cell:nth-child(1) {
-                grid-row: span 1;
-                min-height: 280px;
-            }
+            #servizi-section { padding-top: 3rem; }
+            .svc-header { padding: 0 1.2rem 2rem; }
+            .svc-track { padding: 0 1.2rem 3rem; }
+            .svc-card { width: calc(100vw - 3.6rem); }
+            .svc-drag-hint { display: none; }
+            .svc-num { font-size: 2.5rem; }
+            .svc-name { font-size: 1.2rem; }
+            .svc-desc { font-size: .76rem; }
 
-            .hero-stats {
-                flex-wrap: wrap;
-            }
+            #numbers { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.2rem; }
+            .num-block { padding: 1.5rem 1rem; border-bottom: 1px solid var(--rule-lt); }
+            .num-block:nth-child(odd) { border-right: 1px solid var(--rule-lt); }
+            .num-block:nth-child(even) { border-right: none; }
+            .num-block:nth-last-child(-n+2) { border-bottom: none; }
+            .num-big { font-size: clamp(2rem, 8vw, 3rem); }
+            .num-label { font-size: .42rem; }
+            .num-desc { display: none; }
 
-            .h-stat {
-                min-width: 50%;
-            }
+            #approccio { padding: 3.5rem 1.2rem; }
+            .approccio-grid { gap: 2rem; }
+            .ap-pull { font-size: 1.05rem; padding-left: 1.2rem; margin-top: 1.5rem; }
+            .why-row { grid-template-columns: 2rem 1fr; gap: 1rem; padding: 1.4rem 0; }
+            .why-n { font-size: .85rem; }
+            .cert-section { margin-top: 2rem; }
 
-            .band-actions {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1.2rem;
-            }
+            #recensioni { padding: 3.5rem 1.2rem; }
+            .rev-top { gap: 1.2rem; padding-bottom: 1.8rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
+            .rev-score-big { font-size: clamp(3.5rem, 12vw, 5rem); }
+            .rev-grid { grid-template-columns: 1fr; }
+            .rev-card { padding: 1.8rem 1.2rem; border-right: none; }
+            .rev-body { font-size: .88rem; }
 
-            .hero-content {
-                padding-bottom: clamp(9rem, 18vw, 14rem);
-            }
+            #chi { padding: 3.5rem 1.2rem; }
+            .chi-layout { gap: 2rem; }
+            .chi-copy .chi-pull { font-size: 1.05rem; padding-left: 1.2rem; }
+            .story-block { padding: 1.5rem 0; }
 
-            .hero-title {
-                font-size: clamp(3.5rem, 16vw, 6rem);
-            }
+            #faq { padding: 3.5rem 1.2rem; }
+            .faq-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+            .faq-q { font-size: .88rem; padding: 1.2rem 0; }
+            .faq-aside { padding-top: 0; }
+            .faq-aside h3 { font-size: 1.7rem; }
+            .faq-btns { flex-direction: column; width: 100%; }
+            .faq-btn { width: 100%; text-align: center; padding: .95rem 1.5rem; box-sizing: border-box; }
+            .faq-btn.ghost { text-align: left; padding: .8rem 0; width: auto; }
 
-            .hero-badge {
-                display: none;
-            }
+            #band { padding: 3rem 1.2rem; gap: 2rem; }
+            .band-title { font-size: clamp(1.6rem, 6.5vw, 2.2rem); }
+            .band-actions { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
+            .band-btn { padding: .85rem 2rem; }
 
-            #wa {
-                bottom: 1.2rem;
-                right: 1.2rem;
-            }
+            #contatti { padding: 3.5rem 1.2rem; }
+            .cnt-layout { gap: 2.5rem; }
+            .cnt-row { grid-template-columns: 3.5rem 1fr; gap: 1rem; padding: 1.2rem 0; }
+            .cnt-lbl { font-size: .42rem; letter-spacing: .2em; }
+            .cnt-val { font-size: .82rem; }
+            .map-block { padding: 1.8rem 1.4rem; }
+            .form-title { font-size: 1.4rem; margin-bottom: 1.8rem; }
 
-            .cnt-row {
-                grid-template-columns: 4rem 1fr;
-            }
+            footer { padding: 3rem 1.2rem 1.5rem; }
+            .ft-grid { grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
+            .ft-brand { font-size: 1.1rem; }
+            .ft-bottom { flex-direction: column; align-items: flex-start; gap: .8rem; }
+            .ft-legal { gap: 1.5rem; }
 
-            .svc-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
+            .s-h2 { font-size: clamp(2rem, 8vw, 3rem); }
+            #wa { bottom: 1rem; right: 1rem; width: 46px; height: 46px; }
+            #wa svg { width: 24px; height: 24px; }
+        }
+
+        @media(max-width:380px) {
+            .hero-title { font-size: clamp(2.6rem, 13vw, 3.5rem); }
+            .manifesto-text { font-size: 1.15rem; }
+            .svc-card { width: calc(100vw - 2.4rem); }
+            .h-stat-n { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -2162,14 +2070,12 @@
     <div id="c-ring"></div>
     <div id="prog"></div>
 
-    <!-- WhatsApp floating button with SVG logo -->
     <a href="https://wa.me/393669907230" id="wa" target="_blank" aria-label="WhatsApp">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
         </svg>
     </a>
 
-    <!-- NAV -->
     <nav id="nav">
         <a href="#" class="nav-logo">
             <span class="nav-logo-name">Snake Garage</span>
@@ -2187,7 +2093,6 @@
         <button class="nav-mob" onclick="toggleNav()">Menu</button>
     </nav>
 
-    <!-- HERO -->
     <section id="hero">
         <div class="hero-photo"></div>
         <div class="hero-overlay"></div>
@@ -2230,7 +2135,6 @@
         </div>
     </section>
 
-    <!-- MANIFESTO -->
     <section id="manifesto">
         <div class="manifesto-line" id="mline"></div>
         <div>
@@ -2242,7 +2146,6 @@
         </div>
     </section>
 
-    <!-- STRIP -->
     <div id="strip">
         <div class="strip-track">
             <div class="strip-item"><span class="dot"></span> Via Enrico Fermi, 21 · Reggio Emilia</div>
@@ -2262,7 +2165,6 @@
         </div>
     </div>
 
-    <!-- SERVICES -->
     <section id="servizi-section">
         <div class="svc-header">
             <div class="svc-header-left">
@@ -2273,84 +2175,64 @@
         </div>
         <div class="svc-scroll-wrap" id="svcWrap">
             <div class="svc-track" id="svcTrack">
-
-                <!-- I -->
                 <div class="svc-card">
                     <span class="svc-num">I</span>
                     <h3 class="svc-name">Manutenzione tecnica e tagliandi</h3>
                     <p class="svc-desc">Tagliando completo con check dei principali sistemi del veicolo e verifica preventiva dei componenti soggetti a usura. Utilizziamo ricambi originali o equivalenti certificati garantiti da noi. Scheda manutenzione rilasciata ad ogni intervento.</p>
                     <div class="svc-tag">Ricambi originali o equivalenti certificati</div>
                 </div>
-
-                <!-- II -->
                 <div class="svc-card">
                     <span class="svc-num">II</span>
                     <h3 class="svc-name">Diagnosi elettronica avanzata</h3>
                     <p class="svc-desc">Analisi centraline, sensori e sistemi con lettura dei parametri reali del veicolo per individuare il guasto con precisione. Lettura, analisi e reset di tutti i codici di errore presenti sul veicolo.</p>
                     <div class="svc-tag">Strumentazione professionale TEXA</div>
                 </div>
-
-                <!-- III -->
                 <div class="svc-card">
                     <span class="svc-num">III</span>
                     <h3 class="svc-name">Freni, sospensioni e assetti</h3>
                     <p class="svc-desc">Sostituzione e check di dischi, pastiglie, ammortizzatori e assetti sportivi. Bracci, silent block e verifica completa dell'assetto prima e dopo ogni intervento sulla geometria ruote.</p>
                     <div class="svc-tag">Sicurezza attiva</div>
                 </div>
-
-                <!-- IV -->
                 <div class="svc-card">
                     <span class="svc-num">IV</span>
                     <h3 class="svc-name">Distribuzione e frizione</h3>
                     <p class="svc-desc">Sostituzione cinghia di distribuzione, catene motore e trasmissioni. Interventi su frizione con procedure mirate su tutti i principali modelli europei e giapponesi. Intervento garantito.</p>
                     <div class="svc-tag">Garanzia lavoro</div>
                 </div>
-
-                <!-- V -->
                 <div class="svc-card">
                     <span class="svc-num">V</span>
                     <h3 class="svc-name">Sistemi di iniezione e alimentazione</h3>
                     <p class="svc-desc">Test e diagnosi dell'alimentazione diesel, benzina e GPL. Pulizia iniettori e verifica pompe carburanti con revisione. Interventi con strumentazione professionale dedicata.</p>
                     <div class="svc-tag">Con strumentazione professionale</div>
                 </div>
-
-                <!-- VI -->
                 <div class="svc-card">
                     <span class="svc-num">VI</span>
                     <h3 class="svc-name">Climatizzazione</h3>
                     <p class="svc-desc">Manutenzione e ricarica climatizzatore con gas certificati R134a e R1234yf. Controllo perdite, pulizia e sanificazione circuito. Operatori certificati F-Gas secondo il D.Lgs. 26/2013.</p>
                     <div class="svc-tag">Certificazione F-GAS</div>
                 </div>
-
-                <!-- VII -->
                 <div class="svc-card">
                     <span class="svc-num">VII</span>
                     <h3 class="svc-name">Impianti elettrici</h3>
                     <p class="svc-desc">Riparazione degli impianti elettrici ed elettronici del veicolo. Cablaggi, sensori e componenti. Manutenzione alternatori e motorini di avviamento. Check dei sistemi di bordo per garantire il pieno funzionamento del veicolo.</p>
                     <div class="svc-tag">Tutte le architetture</div>
                 </div>
-
-                <!-- VIII -->
                 <div class="svc-card">
                     <span class="svc-num">VIII</span>
                     <h3 class="svc-name">Pneumatici</h3>
                     <p class="svc-desc">Montaggio, bilanciatura completa e cambio gomme con sensori TPMS. Stock di pneumatici estivi, invernali e 4 stagioni delle principali marche per tutte le misure.</p>
                     <div class="svc-tag">Attrezzatura certificata</div>
                 </div>
-
-                <!-- IX -->
                 <div class="svc-card">
                     <span class="svc-num">IX</span>
                     <h3 class="svc-name">Controllo pre-revisione</h3>
                     <p class="svc-desc">Verifica dei principali sistemi di sicurezza e delle anomalie da risolvere prima della presentazione alla motorizzazione. Ogni criticità rilevata viene corretta con ricambi di prima qualità.</p>
                     <div class="svc-tag">Su appuntamento dedicato</div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- NUMBERS -->
     <div id="numbers">
         <div class="num-block reveal-el">
             <span class="num-big"><span class="counter" data-target="20">0</span><span class="num-suffix">+</span></span>
@@ -2374,7 +2256,6 @@
         </div>
     </div>
 
-    <!-- APPROCCIO -->
     <section id="approccio">
         <div class="approccio-grid">
             <div class="ap-left">
@@ -2440,7 +2321,6 @@
         </div>
     </section>
 
-    <!-- REVIEWS -->
     <section id="recensioni">
         <span class="s-eye reveal-el">Testimonianze</span>
         <h2 class="s-h2 reveal-el">I nostri <em>clienti</em></h2>
@@ -2494,21 +2374,6 @@
         </div>
     </section>
 
-    <!-- GALLERY -->
-    <section id="galleria">
-        <span class="s-eye reveal-el">Gli spazi</span>
-        <h2 class="s-h2 reveal-el">L'officina <em>dall'interno</em></h2>
-        <p class="s-intro reveal-el">Foto demo da Unsplash, utili come placeholder finché non carichi il materiale reale dell'officina.</p>
-        <div class="gal-layout">
-            <div class="gal-cell reveal-el"><span class="gal-lbl">Officina principale</span></div>
-            <div class="gal-cell reveal-el" style="transition-delay:.06s"><span class="gal-lbl">Banco attrezzi</span></div>
-            <div class="gal-cell reveal-el" style="transition-delay:.12s"><span class="gal-lbl">Ponte sollevatore</span></div>
-            <div class="gal-cell reveal-el" style="transition-delay:.18s"><span class="gal-lbl">Diagnosi elettronica</span></div>
-            <div class="gal-cell reveal-el" style="transition-delay:.24s"><span class="gal-lbl">Area performance</span></div>
-        </div>
-    </section>
-
-    <!-- CHI SIAMO -->
     <section id="chi">
         <div class="chi-layout">
             <div class="chi-copy">
@@ -2538,7 +2403,6 @@
         </div>
     </section>
 
-    <!-- FAQ -->
     <section id="faq">
         <div class="faq-layout">
             <div>
@@ -2546,39 +2410,25 @@
                 <h2 class="s-h2 reveal-el"><em>FAQ</em></h2>
                 <div class="faq-list" style="margin-top:3rem">
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Fate preventivi gratuiti?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Sì, il preventivo è sempre gratuito e senza impegno. Non iniziamo alcun lavoro senza la vostra approvazione scritta. Il costo finale non potrà mai superare quanto concordato.</p>
-                        </div>
+                        <div class="faq-ans"><p>No, i preventivi non sono gratuiti. Per fornire una valutazione precisa, effettuiamo prima una diagnosi tecnica del veicolo, che richiede tempo e strumenti professionali. Il costo della diagnosi verrà scalato dal prezzo finale nel caso decidiate di effettuare la riparazione presso la nostra officina.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Lavorate su appuntamento?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Principalmente su appuntamento per garantire tempi certi. È possibile prenotare via telefono, WhatsApp o modulo. Per urgenze verifichiamo sempre la disponibilità in giornata.</p>
-                        </div>
+                        <div class="faq-ans"><p>Principalmente su appuntamento per garantire tempi certi. È possibile prenotare via telefono, WhatsApp o modulo. Per urgenze verifichiamo sempre la disponibilità in giornata.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Quanto dura un tagliando?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Un tagliando ordinario viene completato entro tre ore dalla presa in carico. Per interventi più complessi forniamo una stima precisa in fase di prenotazione.</p>
-                        </div>
+                        <div class="faq-ans"><p>Un tagliando completo richiede generalmente mezza giornata. L'intervento comprende controllo generale del veicolo, sostituzione dell'olio motore e cambio di tutti i filtri previsti. Durante il check verifichiamo anche i principali componenti per assicurarci che tutto funzioni correttamente.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Trattate veicoli commerciali?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Sì, lavoriamo su furgoni e veicoli commerciali leggeri fino a 3,5 tonnellate. Seguiamo diverse flotte aziendali con piani di manutenzione programmata.</p>
-                        </div>
+                        <div class="faq-ans"><p>Sì, lavoriamo su furgoni e veicoli commerciali leggeri fino a 3,5 tonnellate. Seguiamo diverse flotte aziendali con piani di manutenzione programmata.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Posso portare i ricambi?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Preferiamo fornire noi i ricambi per garantire qualità e copertura in garanzia. Non possiamo offrire garanzia sul materiale portato dal cliente, ma valutiamo caso per caso.</p>
-                        </div>
+                        <div class="faq-ans"><p>No, non lavoriamo con ricambi forniti dal cliente. Utilizziamo esclusivamente ricambi selezionati e forniti da noi per garantire qualità, compatibilità e la garanzia sul lavoro eseguito. In questo modo possiamo assicurarci che ogni componente sia adatto al veicolo e coperto dai nostri fornitori. Con materiale esterno non sarebbe possibile garantire la stessa affidabilità e copertura.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Accettate pagamenti con carta?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Sì, accettiamo tutte le carte di credito, debito e contactless. Anche contanti e bonifico. Emettiamo sempre fattura regolare.</p>
-                        </div>
+                        <div class="faq-ans"><p>Sì, accettiamo tutte le carte di credito, debito e contactless. Anche contanti e bonifico. Emettiamo sempre fattura regolare.</p></div>
                     </div>
                     <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Seguite anche le moto?<span class="faq-icon">+</span></button>
-                        <div class="faq-ans">
-                            <p>Sì, lavoriamo su motociclette di tutte le marche inclusi modelli meno comuni. Tagliandi, riparazioni meccaniche, freni e pneumatici.</p>
-                        </div>
+                        <div class="faq-ans"><p>Sì, lavoriamo su motociclette di tutte le marche inclusi modelli meno comuni. Tagliandi, riparazioni meccaniche, freni e pneumatici.</p></div>
                     </div>
                 </div>
             </div>
@@ -2594,7 +2444,6 @@
         </div>
     </section>
 
-    <!-- CTA BAND -->
     <div id="band">
         <h2 class="band-title">Un problema alla vostra<br><em>auto?</em></h2>
         <div class="band-actions">
@@ -2603,12 +2452,11 @@
         </div>
     </div>
 
-    <!-- CONTACTS -->
     <section id="contatti">
         <div class="cnt-layout">
             <div class="cnt-details">
                 <span class="s-eye reveal-el">Dove siamo</span>
-                <h2 class="s-h2 reveal-el">Contatti<br><em>& sede</em></h2>
+                <h2 class="s-h2 reveal-el">Contatti<br><em>&amp; sede</em></h2>
                 <div class="cnt-detail-list">
                     <div class="cnt-row reveal-el"><span class="cnt-lbl">Telefono</span>
                         <div class="cnt-val"><a href="tel:+393669907230">+39 366 990 7230</a><span class="cnt-small">Lun–Ven 08:30–19:30</span></div>
@@ -2661,7 +2509,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="ft-grid">
             <div>
@@ -2711,6 +2558,7 @@
         </div>
         <div class="ft-bottom">
             <p class="ft-copy">© 2026 Snake Garage di Mirco &ensp;·&ensp; P. IVA da aggiornare &ensp;·&ensp; Reggio Emilia</p>
+            <p class="ft-made">made by <a href="mailto:oakvx7@gmail.com">oakvx</a></p>
             <div class="ft-legal">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Cookie Policy</a>
@@ -2722,14 +2570,8 @@
         /* CURSOR */
         const dot = document.getElementById('c-dot');
         const ring = document.getElementById('c-ring');
-        let mx = 0,
-            my = 0,
-            rx = 0,
-            ry = 0;
-        document.addEventListener('mousemove', e => {
-            mx = e.clientX;
-            my = e.clientY;
-        });
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
         (function animCursor() {
             rx += (mx - rx) * .14;
             ry += (my - ry) * .14;
@@ -2751,9 +2593,7 @@
             const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
             prog.style.transform = `scaleX(${p})`;
             nav.classList.toggle('scrolled', window.scrollY > 80);
-        }, {
-            passive: true
-        });
+        }, { passive: true });
 
         /* HERO INTRO */
         window.addEventListener('load', () => {
@@ -2762,10 +2602,7 @@
             setTimeout(() => document.getElementById('hw2').classList.add('show'), 580);
             setTimeout(() => document.getElementById('hd').classList.add('show'), 900);
             setTimeout(() => document.getElementById('hc').classList.add('show'), 1100);
-            setTimeout(() => {
-                const b = document.getElementById('hbadge');
-                if (b) b.classList.add('show');
-            }, 1300);
+            setTimeout(() => { const b = document.getElementById('hbadge'); if (b) b.classList.add('show'); }, 1300);
             [document.getElementById('hs1'), document.getElementById('hs2'), document.getElementById('hs3'), document.getElementById('hs4')].forEach(el => {
                 if (el) setTimeout(() => el.classList.add('show'), 1400);
             });
@@ -2787,9 +2624,7 @@
                 e.target.querySelectorAll('.counter').forEach(c => animCounter(c));
                 revObs.unobserve(e.target);
             });
-        }, {
-            threshold: 0.12
-        });
+        }, { threshold: 0.12 });
         document.querySelectorAll('.reveal-el').forEach(el => revObs.observe(el));
 
         /* MANIFESTO */
@@ -2805,9 +2640,7 @@
                 document.getElementById('msub').classList.add('show');
                 mObs.unobserve(e.target);
             });
-        }, {
-            threshold: 0.3
-        });
+        }, { threshold: 0.3 });
         const manSec = document.getElementById('manifesto');
         if (manSec) mObs.observe(manSec);
 
@@ -2818,7 +2651,6 @@
             const target = +el.dataset.target;
             const duration = 1600;
             const start = performance.now();
-
             function step(ts) {
                 const p = Math.min((ts - start) / duration, 1);
                 const ease = 1 - Math.pow(1 - p, 3);
@@ -2834,76 +2666,43 @@
                 e.target.querySelectorAll('.counter').forEach(animCounter);
                 numObs.unobserve(e.target);
             });
-        }, {
-            threshold: 0.3
-        });
+        }, { threshold: 0.3 });
         document.querySelectorAll('.num-block').forEach(b => numObs.observe(b));
 
         /* HORIZONTAL DRAG SCROLL */
         const wrap = document.getElementById('svcWrap');
         const track = document.getElementById('svcTrack');
-        let isDragging = false,
-            startX = 0,
-            scrollStart = 0,
-            velX = 0,
-            lastX = 0,
-            raf = null;
+        let isDragging = false, startX = 0, scrollStart = 0, velX = 0, lastX = 0, raf = null;
         wrap.addEventListener('mousedown', e => {
-            isDragging = true;
-            startX = e.pageX;
-            scrollStart = wrap._sx || 0;
-            lastX = e.pageX;
-            velX = 0;
+            isDragging = true; startX = e.pageX; scrollStart = wrap._sx || 0; lastX = e.pageX; velX = 0;
             cancelAnimationFrame(raf);
         });
         window.addEventListener('mousemove', e => {
             if (!isDragging) return;
             const dx = e.pageX - startX;
-            velX = e.pageX - lastX;
-            lastX = e.pageX;
-            wrap._sx = scrollStart - dx;
-            clampAndApply();
+            velX = e.pageX - lastX; lastX = e.pageX;
+            wrap._sx = scrollStart - dx; clampAndApply();
         });
-        window.addEventListener('mouseup', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            momentum();
-        });
+        window.addEventListener('mouseup', () => { if (!isDragging) return; isDragging = false; momentum(); });
         wrap.addEventListener('touchstart', e => {
-            startX = e.touches[0].pageX;
-            scrollStart = wrap._sx || 0;
-            lastX = startX;
-            velX = 0;
+            startX = e.touches[0].pageX; scrollStart = wrap._sx || 0; lastX = startX; velX = 0;
             cancelAnimationFrame(raf);
-        }, {
-            passive: true
-        });
+        }, { passive: true });
         wrap.addEventListener('touchmove', e => {
             const dx = e.touches[0].pageX - startX;
-            velX = e.touches[0].pageX - lastX;
-            lastX = e.touches[0].pageX;
-            wrap._sx = scrollStart - dx;
-            clampAndApply();
-        }, {
-            passive: true
-        });
+            velX = e.touches[0].pageX - lastX; lastX = e.touches[0].pageX;
+            wrap._sx = scrollStart - dx; clampAndApply();
+        }, { passive: true });
         wrap.addEventListener('touchend', () => momentum());
-
-        function getMaxScroll() {
-            return track.scrollWidth - wrap.offsetWidth;
-        }
-
+        function getMaxScroll() { return track.scrollWidth - wrap.offsetWidth; }
         function clampAndApply() {
             const max = getMaxScroll();
             wrap._sx = Math.max(0, Math.min(wrap._sx, max));
             track.style.transform = `translateX(-${wrap._sx}px)`;
         }
-
         function momentum() {
             raf = requestAnimationFrame(function loop() {
-                velX *= 0.92;
-                wrap._sx -= velX;
-                clampAndApply();
+                velX *= 0.92; wrap._sx -= velX; clampAndApply();
                 if (Math.abs(velX) > 0.4) raf = requestAnimationFrame(loop);
             });
         }
@@ -2919,10 +2718,7 @@
         /* MOBILE NAV */
         function toggleNav() {
             const l = document.querySelector('.nav-center');
-            if (l.style.display === 'flex') {
-                l.style.display = 'none';
-                return;
-            }
+            if (l.style.display === 'flex') { l.style.display = 'none'; return; }
             l.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(3,8,6,.97);padding:2rem clamp(2rem,6vw,6rem);gap:1.8rem;border-bottom:1px solid rgba(44,255,133,.15);z-index:7999;backdrop-filter:blur(24px)';
         }
 
