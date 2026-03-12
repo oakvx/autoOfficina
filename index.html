@@ -9,32 +9,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <style>
-        /* ═══════════════════════════════════════════════
-   FOUNDATIONS
-═══════════════════════════════════════════════ */
         :root {
             --void: #030806;
             --deep: #07110d;
             --surface: #0c1813;
             --panel: #11201a;
-
-            /* mantengo i nomi per non rompere il CSS */
             --gold: #2cff85;
             --gold-lt: #9dffbf;
             --gold-dk: #0f7f47;
-
             --cream: #d9ffea;
             --parch: #f2fff8;
             --mid: #7eb79a;
             --dim: #294438;
-
             --rule: rgba(44, 255, 133, 0.22);
             --rule-lt: rgba(44, 255, 133, 0.10);
-
             --font-display: 'Syne', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
             --font-tech: 'Oxanium', sans-serif;
-
             --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
         }
@@ -64,7 +55,6 @@
             cursor: none;
         }
 
-        /* grain overlay */
         body::after {
             content: '';
             position: fixed;
@@ -76,7 +66,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* ─── CURSOR ─── */
         #c-dot {
             width: 6px;
             height: 6px;
@@ -89,12 +78,13 @@
             pointer-events: none;
             transform: translate(-50%, -50%);
             transition: transform .08s, background .3s;
+            box-shadow: 0 0 14px rgba(44, 255, 133, .55);
         }
 
         #c-ring {
             width: 44px;
             height: 44px;
-            border: 1px solid rgba(154, 122, 60, .5);
+            border: 1px solid rgba(44, 255, 133, .36);
             border-radius: 50%;
             position: fixed;
             top: 0;
@@ -102,17 +92,15 @@
             z-index: 9997;
             pointer-events: none;
             transform: translate(-50%, -50%);
-            transition: width .4s var(--ease-out), height .4s var(--ease-out),
-                border-color .4s, opacity .3s;
+            transition: width .4s var(--ease-out), height .4s var(--ease-out), border-color .4s, opacity .3s;
         }
 
         body.hovering #c-ring {
             width: 72px;
             height: 72px;
-            border-color: rgba(154, 122, 60, .8);
+            border-color: rgba(157, 255, 191, .78);
         }
 
-        /* ─── PROGRESS BAR ─── */
         #prog {
             position: fixed;
             top: 0;
@@ -125,11 +113,10 @@
             z-index: 9000;
             opacity: .8;
             transition: transform .05s linear;
+            box-shadow: 0 0 14px rgba(44, 255, 133, .35);
         }
 
-        /* ═══════════════════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════════════════ */
+        /* NAV */
         nav {
             position: fixed;
             top: 0;
@@ -145,9 +132,9 @@
         }
 
         nav.scrolled {
-            background: rgba(10, 9, 7, .92);
-            backdrop-filter: blur(24px);
-            border-bottom: 1px solid var(--rule-lt);
+            background: rgba(3, 8, 6, .86);
+            backdrop-filter: blur(24px) saturate(140%);
+            border-bottom: 1px solid rgba(44, 255, 133, .08);
         }
 
         .nav-logo {
@@ -161,7 +148,6 @@
 
         .nav-logo-name {
             font-family: 'Syne', sans-serif;
-            font-style: normal;
             font-weight: 700;
             font-size: 1.1rem;
             letter-spacing: .04em;
@@ -252,9 +238,7 @@
             color: var(--mid);
         }
 
-        /* ═══════════════════════════════════════════════
-   HERO — FULLSCREEN VIDEO
-═══════════════════════════════════════════════ */
+        /* HERO */
         #hero {
             height: 100vh;
             min-height: 700px;
@@ -265,13 +249,11 @@
             justify-content: flex-end;
         }
 
-        /* ── photo background ── */
         .hero-photo {
             position: absolute;
             inset: 0;
             z-index: 0;
-            background:
-                url('https://i.ibb.co/mrZLmBnx/cash-macanaya-9-Kz-K9u-n-Crs-unsplash.png') center center / cover no-repeat;
+            background: url('https://i.ibb.co/Y4ck9sZy/image.png') center center / cover no-repeat;
             transform: scale(1.04);
             animation: heroZoom 18s ease-out forwards;
         }
@@ -286,7 +268,6 @@
             }
         }
 
-        /* ── dark gradient overlay over photo ── */
         .hero-overlay {
             position: absolute;
             inset: 0;
@@ -296,13 +277,11 @@
                 linear-gradient(to top, rgba(3, 8, 6, .92) 0%, rgba(3, 8, 6, .5) 30%, transparent 65%);
         }
 
-        /* ── content over photo ── */
         .hero-content {
             position: relative;
             z-index: 2;
             padding: clamp(3rem, 6vw, 6rem);
             padding-bottom: clamp(3.5rem, 7vw, 7rem);
-            /* no max-width — title must never be clipped */
             width: 100%;
         }
 
@@ -342,7 +321,6 @@
             line-height: .88;
             letter-spacing: -.04em;
             color: var(--parch);
-            /* never overflow the viewport */
             width: fit-content;
             max-width: calc(100vw - clamp(6rem, 12vw, 12rem));
         }
@@ -415,9 +393,7 @@
             transition: background .4s, color .4s;
             position: relative;
             overflow: hidden;
-            box-shadow:
-                0 0 0 1px rgba(157, 255, 191, .12) inset,
-                0 0 24px rgba(44, 255, 133, .25);
+            box-shadow: 0 0 0 1px rgba(157, 255, 191, .12) inset, 0 0 24px rgba(44, 255, 133, .25);
         }
 
         .btn-hero::before {
@@ -457,7 +433,6 @@
             border-color: var(--gold);
         }
 
-        /* ── hero stats bar ── */
         .hero-stats {
             position: relative;
             z-index: 2;
@@ -505,7 +480,6 @@
             display: block;
         }
 
-        /* ── green badge top-right ── */
         .hero-badge {
             position: absolute;
             top: clamp(5rem, 9vw, 8rem);
@@ -547,9 +521,7 @@
             color: rgba(217, 255, 234, .5);
         }
 
-        /* ═══════════════════════════════════════════════
-   MANIFESTO SECTION
-═══════════════════════════════════════════════ */
+        /* MANIFESTO */
         #manifesto {
             min-height: 60vh;
             display: flex;
@@ -569,6 +541,24 @@
 
         .manifesto-line.show {
             height: 0;
+        }
+
+        .manifesto-lead {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--gold-lt);
+            letter-spacing: -.02em;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 30px rgba(44, 255, 133, .3);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .8s .1s, transform .8s .1s var(--ease-out);
+        }
+
+        .manifesto-lead.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .manifesto-text {
@@ -613,16 +603,13 @@
             opacity: 1;
         }
 
-        /* ═══════════════════════════════════════════════
-   INFO STRIP
-═══════════════════════════════════════════════ */
+        /* STRIP */
         #strip {
             background: var(--surface);
             border-top: 1px solid var(--rule-lt);
             border-bottom: 1px solid var(--rule-lt);
             padding: .9rem 0;
             overflow: hidden;
-            position: relative;
         }
 
         .strip-track {
@@ -665,9 +652,7 @@
             flex-shrink: 0;
         }
 
-        /* ═══════════════════════════════════════════════
-   SERVICES — HORIZONTAL SCROLL
-═══════════════════════════════════════════════ */
+        /* SERVICES */
         #servizi-section {
             background: var(--void);
             padding-top: clamp(5rem, 9vw, 8rem);
@@ -680,8 +665,6 @@
             justify-content: space-between;
             gap: 2rem;
         }
-
-        .svc-header-left {}
 
         .svc-drag-hint {
             font-family: 'Oxanium', sans-serif;
@@ -808,9 +791,7 @@
             opacity: .5;
         }
 
-        /* ═══════════════════════════════════════════════
-   NUMBERS BAND
-═══════════════════════════════════════════════ */
+        /* NUMBERS */
         #numbers {
             background: var(--deep);
             border-top: 1px solid var(--rule-lt);
@@ -873,9 +854,7 @@
             font-weight: 300;
         }
 
-        /* ═══════════════════════════════════════════════
-   APPROCCIO (WHY)
-═══════════════════════════════════════════════ */
+        /* APPROCCIO */
         #approccio {
             background: var(--void);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -887,8 +866,6 @@
             gap: 8rem;
             align-items: start;
         }
-
-        .ap-left {}
 
         .ap-pull {
             font-family: 'Syne', sans-serif;
@@ -970,8 +947,6 @@
             flex-shrink: 0;
         }
 
-        .ap-right {}
-
         .why-rows {
             border-top: 1px solid var(--rule-lt);
         }
@@ -1017,9 +992,7 @@
             color: var(--mid);
         }
 
-        /* ═══════════════════════════════════════════════
-   REVIEWS
-═══════════════════════════════════════════════ */
+        /* REVIEWS */
         #recensioni {
             background: var(--deep);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -1043,8 +1016,6 @@
             line-height: 1;
             letter-spacing: -.05em;
         }
-
-        .rev-meta-r {}
 
         .rev-stars {
             letter-spacing: .2rem;
@@ -1165,9 +1136,7 @@
             transform: translateX(4px);
         }
 
-        /* ═══════════════════════════════════════════════
-   GALLERY
-═══════════════════════════════════════════════ */
+        /* GALLERY */
         #galleria {
             background: var(--void);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -1190,7 +1159,6 @@
             display: flex;
             align-items: flex-end;
             padding: 1.5rem;
-            transition: border-color .5s;
             opacity: 0;
             transition: opacity .7s var(--ease-out), border-color .5s;
             background-size: cover;
@@ -1205,33 +1173,23 @@
 
         .gal-cell:nth-child(1) {
             grid-row: span 2;
-            background-image:
-                linear-gradient(to top, rgba(3, 8, 6, .88) 0%, rgba(3, 8, 6, .16) 55%),
-                url('https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&fm=jpg&q=80&w=1400');
+            background-image: linear-gradient(to top, rgba(3, 8, 6, .88) 0%, rgba(3, 8, 6, .16) 55%), url('https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&fm=jpg&q=80&w=1400');
         }
 
         .gal-cell:nth-child(2) {
-            background-image:
-                linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%),
-                url('https://images.unsplash.com/photo-1637640125496-31852f042a60?auto=format&fit=crop&fm=jpg&q=80&w=1000');
+            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1637640125496-31852f042a60?auto=format&fit=crop&fm=jpg&q=80&w=1000');
         }
 
         .gal-cell:nth-child(3) {
-            background-image:
-                linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%),
-                url('https://images.unsplash.com/photo-1593699199342-59b40e08f0ac?auto=format&fit=crop&fm=jpg&q=80&w=1000');
+            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1593699199342-59b40e08f0ac?auto=format&fit=crop&fm=jpg&q=80&w=1000');
         }
 
         .gal-cell:nth-child(4) {
-            background-image:
-                linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%),
-                url('https://images.unsplash.com/photo-1596986952526-3be237187071?auto=format&fit=crop&fm=jpg&q=80&w=1000');
+            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1596986952526-3be237187071?auto=format&fit=crop&fm=jpg&q=80&w=1000');
         }
 
         .gal-cell:nth-child(5) {
-            background-image:
-                linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%),
-                url('https://images.unsplash.com/photo-1617898529288-7f3efcf8e299?auto=format&fit=crop&fm=jpg&q=80&w=1000');
+            background-image: linear-gradient(to top, rgba(3, 8, 6, .86) 0%, rgba(3, 8, 6, .12) 55%), url('https://images.unsplash.com/photo-1617898529288-7f3efcf8e299?auto=format&fit=crop&fm=jpg&q=80&w=1000');
         }
 
         .gal-cell:hover {
@@ -1242,10 +1200,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%),
-                repeating-linear-gradient(135deg, transparent, transparent 32px,
-                    rgba(255, 255, 255, .01) 32px, rgba(255, 255, 255, .01) 33px);
+            background: linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%), repeating-linear-gradient(135deg, transparent, transparent 32px, rgba(255, 255, 255, .01) 32px, rgba(255, 255, 255, .01) 33px);
         }
 
         .gal-cell::after {
@@ -1271,9 +1226,7 @@
             color: var(--cream);
         }
 
-        /* ═══════════════════════════════════════════════
-   TEAM / CHI SIAMO
-═══════════════════════════════════════════════ */
+        /* CHI SIAMO */
         #chi {
             background: var(--deep);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -1358,9 +1311,36 @@
             color: var(--mid);
         }
 
-        /* ═══════════════════════════════════════════════
-   FAQ
-═══════════════════════════════════════════════ */
+        .chi-story {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            padding-top: 1rem;
+        }
+
+        .story-block {
+            border-top: 1px solid var(--rule-lt);
+            padding: 2rem 0;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .8s, transform .8s var(--ease-out);
+        }
+
+        .story-block.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .story-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            font-size: .82rem;
+            letter-spacing: .04em;
+            line-height: 1.95;
+            color: var(--mid);
+        }
+
+        /* FAQ */
         #faq {
             background: var(--void);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -1512,9 +1492,7 @@
             border-color: transparent;
         }
 
-        /* ═══════════════════════════════════════════════
-   CTA BAND
-═══════════════════════════════════════════════ */
+        /* CTA BAND */
         #band {
             background: linear-gradient(135deg, #0c1813 0%, #0f7f47 100%);
             border-top: 1px solid rgba(44, 255, 133, .45);
@@ -1532,10 +1510,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(135deg, rgba(157, 255, 191, .10) 0%, transparent 38%),
-                repeating-linear-gradient(135deg, transparent, transparent 40px,
-                    rgba(255, 255, 255, .03) 40px, rgba(255, 255, 255, .03) 41px);
+            background: linear-gradient(135deg, rgba(157, 255, 191, .10) 0%, transparent 38%), repeating-linear-gradient(135deg, transparent, transparent 40px, rgba(255, 255, 255, .03) 40px, rgba(255, 255, 255, .03) 41px);
         }
 
         .band-title {
@@ -1547,10 +1522,6 @@
             letter-spacing: -.03em;
             position: relative;
             z-index: 1;
-        }
-
-        .band-title em {
-            font-style: normal;
         }
 
         .band-actions {
@@ -1572,9 +1543,7 @@
             background: linear-gradient(135deg, var(--gold), var(--gold-lt));
             padding: .9rem 2.5rem;
             transition: background .3s, color .3s;
-            box-shadow:
-                0 0 0 1px rgba(157, 255, 191, .12) inset,
-                0 0 24px rgba(44, 255, 133, .12);
+            box-shadow: 0 0 0 1px rgba(157, 255, 191, .12) inset, 0 0 24px rgba(44, 255, 133, .12);
         }
 
         .band-btn:hover {
@@ -1599,9 +1568,7 @@
             border-color: rgba(242, 255, 248, .5);
         }
 
-        /* ═══════════════════════════════════════════════
-   CONTACTS
-═══════════════════════════════════════════════ */
+        /* CONTACTS */
         #contatti {
             background: var(--deep);
             padding: clamp(5rem, 9vw, 9rem) clamp(2rem, 6vw, 6rem);
@@ -1614,8 +1581,6 @@
             gap: 8rem;
             align-items: start;
         }
-
-        .cnt-details {}
 
         .cnt-detail-list {
             border-top: 1px solid var(--rule-lt);
@@ -1687,10 +1652,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background:
-                linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%),
-                repeating-linear-gradient(135deg, transparent, transparent 32px,
-                    rgba(255, 255, 255, .008) 32px, rgba(255, 255, 255, .008) 33px);
+            background: linear-gradient(135deg, rgba(44, 255, 133, .08) 0%, transparent 38%), repeating-linear-gradient(135deg, transparent, transparent 32px, rgba(255, 255, 255, .008) 32px, rgba(255, 255, 255, .008) 33px);
         }
 
         .map-block p,
@@ -1726,7 +1688,6 @@
             border-color: var(--gold);
         }
 
-        /* FORM */
         .form-panel {}
 
         .form-title {
@@ -1842,9 +1803,7 @@
             color: var(--gold);
         }
 
-        /* ═══════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════ */
+        /* FOOTER */
         footer {
             background: var(--void);
             border-top: 1px solid var(--rule-lt);
@@ -1862,7 +1821,6 @@
 
         .ft-brand {
             font-family: 'Syne', sans-serif;
-            font-style: normal;
             font-weight: 700;
             font-size: 1.3rem;
             color: var(--parch);
@@ -1987,35 +1945,37 @@
             color: var(--mid);
         }
 
-        /* ─── WA ─── */
+        /* WA BUTTON */
         #wa {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             z-index: 7000;
-            width: 46px;
-            height: 46px;
-            background: var(--surface);
-            border: 1px solid rgba(44, 255, 133, .25);
+            width: 52px;
+            height: 52px;
+            background: #25D366;
+            border: none;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Oxanium', sans-serif;
-            font-weight: 400;
-            font-size: .45rem;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            color: var(--gold);
             text-decoration: none;
-            transition: border-color .3s, background .3s;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
+            transition: transform .3s var(--ease-out), box-shadow .3s;
         }
 
         #wa:hover {
-            border-color: var(--gold);
-            background: rgba(44, 255, 133, .08);
+            transform: scale(1.1);
+            box-shadow: 0 6px 28px rgba(37, 211, 102, .6);
         }
 
-        /* ─── SECTION SHARED ─── */
+        #wa svg {
+            width: 28px;
+            height: 28px;
+            fill: #fff;
+        }
+
+        /* SHARED */
         .s-eye {
             font-family: 'Oxanium', sans-serif;
             font-weight: 300;
@@ -2074,60 +2034,7 @@
             opacity: 1;
         }
 
-        /* ─── Y2K GREEN TYPO OVERRIDE ─── */
-        nav.scrolled {
-            background: rgba(3, 8, 6, .86);
-            border-bottom: 1px solid rgba(44, 255, 133, .08);
-            backdrop-filter: blur(24px) saturate(140%);
-        }
-
-        #prog {
-            box-shadow: 0 0 14px rgba(44, 255, 133, .35);
-        }
-
-        #c-dot {
-            box-shadow: 0 0 14px rgba(44, 255, 133, .55);
-        }
-
-        #c-ring {
-            border-color: rgba(44, 255, 133, .36);
-        }
-
-        body.hovering #c-ring {
-            border-color: rgba(157, 255, 191, .78);
-        }
-
-        /* ─── CHI STORY BLOCKS ─── */
-        .chi-story {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            padding-top: 1rem;
-        }
-
-        .story-block {
-            border-top: 1px solid var(--rule-lt);
-            padding: 2rem 0;
-            opacity: 0;
-            transform: translateY(12px);
-            transition: opacity .8s, transform .8s var(--ease-out);
-        }
-
-        .story-block.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .story-text {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 300;
-            font-size: .82rem;
-            letter-spacing: .04em;
-            line-height: 1.95;
-            color: var(--mid);
-        }
-
-        /* ─── RESPONSIVE ─── */
+        /* RESPONSIVE */
         @media(max-width:1000px) {
 
             .approccio-grid,
@@ -2251,14 +2158,18 @@
 </head>
 
 <body>
-
-    <!-- cursor -->
     <div id="c-dot"></div>
     <div id="c-ring"></div>
     <div id="prog"></div>
-    <a href="https://wa.me/393669907230" id="wa" target="_blank">WA</a>
 
-    <!-- ══════════════════════ NAV ══════════════════════ -->
+    <!-- WhatsApp floating button with SVG logo -->
+    <a href="https://wa.me/393669907230" id="wa" target="_blank" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+
+    <!-- NAV -->
     <nav id="nav">
         <a href="#" class="nav-logo">
             <span class="nav-logo-name">Snake Garage</span>
@@ -2276,22 +2187,17 @@
         <button class="nav-mob" onclick="toggleNav()">Menu</button>
     </nav>
 
-    <!-- ══════════════════════ HERO ══════════════════════ -->
+    <!-- HERO -->
     <section id="hero">
-        <!-- Green racing car background photo -->
         <div class="hero-photo"></div>
         <div class="hero-overlay"></div>
-
-        <!-- Score badge top-right -->
         <div class="hero-badge" id="hbadge">
             <span class="badge-score">4.9</span>
             <span class="badge-stars">★★★★★</span>
-            <span class="badge-label">214 recensioni Google</span>
+            <span class="badge-label">Recensioni medie Google</span>
         </div>
-
-        <!-- Main content -->
         <div class="hero-content">
-            <div class="hero-eyebrow" id="he">Officina meccanica · dal 2006 · Reggio Emilia</div>
+            <div class="hero-eyebrow" id="he">Officina tecnica specializzata · diagnosi avanzata · Riparazioni complesse</div>
             <h1 class="hero-title">
                 <div class="hero-title-line"><span class="hero-title-word" id="hw1">Snake</span></div>
                 <div class="hero-title-line"><em class="hero-title-word" id="hw2">Garage</em></div>
@@ -2304,8 +2210,6 @@
                 <a href="https://wa.me/393669907230" class="btn-hero-ghost" target="_blank">WhatsApp</a>
             </div>
         </div>
-
-        <!-- Stats bar -->
         <div class="hero-stats">
             <div class="h-stat" id="hs1" style="transition-delay:.4s">
                 <span class="h-stat-n" data-target="20" data-suffix="+">20</span>
@@ -2313,31 +2217,32 @@
             </div>
             <div class="h-stat" id="hs2" style="transition-delay:.55s">
                 <span class="h-stat-n">4.9</span>
-                <span class="h-stat-l">Google · 214 recensioni</span>
+                <span class="h-stat-l">Recensioni medie Google</span>
             </div>
             <div class="h-stat" id="hs3" style="transition-delay:.7s">
                 <span class="h-stat-n" data-target="2500" data-suffix="+">2500</span>
-                <span class="h-stat-l">Clienti seguiti</span>
+                <span class="h-stat-l">Veicoli seguiti</span>
             </div>
             <div class="h-stat" id="hs4" style="transition-delay:.85s">
                 <span class="h-stat-n">3</span>
-                <span class="h-stat-l">Ore per un tagliando</span>
+                <span class="h-stat-l">Tempi di intervento chiari</span>
             </div>
         </div>
     </section>
 
-    <!-- ══════════════════════ MANIFESTO ══════════════════════ -->
+    <!-- MANIFESTO -->
     <section id="manifesto">
         <div class="manifesto-line" id="mline"></div>
         <div>
+            <p class="manifesto-lead" id="mlead">Ogni intervento nasce da una diagnosi reale</p>
             <p class="manifesto-text" id="mtext">
-                Molti veicoli arrivano da noi dopo essere stati controllati altrove. Il nostro lavoro è individuare il problema reale e risolverlo nel modo corretto.
+                Molti veicoli arrivano da noi dopo essere stati controllati altrove. Il nostro lavoro è individuare il vero problema e risolverlo nel modo corretto.
             </p>
             <p class="manifesto-sub" id="msub">Snake Garage — Diagnosi tecnica, precisione meccanica e trasparenza nel lavoro</p>
         </div>
     </section>
 
-    <!-- ══════════════════════ STRIP ══════════════════════ -->
+    <!-- STRIP -->
     <div id="strip">
         <div class="strip-track">
             <div class="strip-item"><span class="dot"></span> Via Enrico Fermi, 21 · Reggio Emilia</div>
@@ -2357,6 +2262,7 @@
         </div>
     </div>
 
+    <!-- SERVICES -->
     <section id="servizi-section">
         <div class="svc-header">
             <div class="svc-header-left">
@@ -2367,64 +2273,84 @@
         </div>
         <div class="svc-scroll-wrap" id="svcWrap">
             <div class="svc-track" id="svcTrack">
+
+                <!-- I -->
                 <div class="svc-card">
                     <span class="svc-num">I</span>
-                    <h3 class="svc-name">Tagliando e manutenzione</h3>
-                    <p class="svc-desc">Olio motore, filtri, candele e liquidi con ricambi originali o OEM certificati dalle case produttrici. Scheda manutenzione rilasciata ad ogni intervento.</p>
-                    <div class="svc-tag">Preventivo incluso</div>
+                    <h3 class="svc-name">Manutenzione tecnica e tagliandi</h3>
+                    <p class="svc-desc">Tagliando completo con check dei principali sistemi del veicolo e verifica preventiva dei componenti soggetti a usura. Utilizziamo ricambi originali o equivalenti certificati garantiti da noi. Scheda manutenzione rilasciata ad ogni intervento.</p>
+                    <div class="svc-tag">Ricambi originali o equivalenti certificati</div>
                 </div>
+
+                <!-- II -->
                 <div class="svc-card">
                     <span class="svc-num">II</span>
-                    <h3 class="svc-name">Diagnosi elettronica</h3>
-                    <p class="svc-desc">Scanner multimarchio professionale per centraline, sensori e sistemi di bordo. Lettura, analisi e reset di tutti i codici di errore presenti sul veicolo.</p>
-                    <div class="svc-tag">Spia motore · ABS · Airbag</div>
+                    <h3 class="svc-name">Diagnosi elettronica avanzata</h3>
+                    <p class="svc-desc">Analisi centraline, sensori e sistemi con lettura dei parametri reali del veicolo per individuare il guasto con precisione. Lettura, analisi e reset di tutti i codici di errore presenti sul veicolo.</p>
+                    <div class="svc-tag">Strumentazione professionale TEXA</div>
                 </div>
+
+                <!-- III -->
                 <div class="svc-card">
                     <span class="svc-num">III</span>
-                    <h3 class="svc-name">Freni e sospensioni</h3>
-                    <p class="svc-desc">Dischi, pastiglie, ammortizzatori, bracci e silent block. Verifica completa dell'assetto prima e dopo ogni intervento sulla geometria ruote.</p>
+                    <h3 class="svc-name">Freni, sospensioni e assetti</h3>
+                    <p class="svc-desc">Sostituzione e check di dischi, pastiglie, ammortizzatori e assetti sportivi. Bracci, silent block e verifica completa dell'assetto prima e dopo ogni intervento sulla geometria ruote.</p>
                     <div class="svc-tag">Sicurezza attiva</div>
                 </div>
+
+                <!-- IV -->
                 <div class="svc-card">
                     <span class="svc-num">IV</span>
                     <h3 class="svc-name">Distribuzione e frizione</h3>
-                    <p class="svc-desc">Sostituzione cinghia di distribuzione con kit completo e frizione su tutti i principali modelli europei e giapponesi. Intervento garantito.</p>
+                    <p class="svc-desc">Sostituzione cinghia di distribuzione, catene motore e trasmissioni. Interventi su frizione con procedure mirate su tutti i principali modelli europei e giapponesi. Intervento garantito.</p>
                     <div class="svc-tag">Garanzia lavoro</div>
                 </div>
+
+                <!-- V -->
                 <div class="svc-card">
                     <span class="svc-num">V</span>
-                    <h3 class="svc-name">Climatizzazione</h3>
-                    <p class="svc-desc">Ricarica gas R134a e R1234yf, pulizia e sanificazione dell'impianto. Operatori certificati F-Gas secondo il D.Lgs. 26/2013.</p>
-                    <div class="svc-tag">Certificazione F-Gas</div>
+                    <h3 class="svc-name">Sistemi di iniezione e alimentazione</h3>
+                    <p class="svc-desc">Test e diagnosi dell'alimentazione diesel, benzina e GPL. Pulizia iniettori e verifica pompe carburanti con revisione. Interventi con strumentazione professionale dedicata.</p>
+                    <div class="svc-tag">Con strumentazione professionale</div>
                 </div>
+
+                <!-- VI -->
                 <div class="svc-card">
                     <span class="svc-num">VI</span>
-                    <h3 class="svc-name">Elettrauto</h3>
-                    <p class="svc-desc">Batteria, alternatore, motorini e impianto di cablaggio. Diagnosi con oscilloscopio su veicoli di ogni generazione, inclusi ibridi e MHEV.</p>
-                    <div class="svc-tag">Tutte le architetture</div>
+                    <h3 class="svc-name">Climatizzazione</h3>
+                    <p class="svc-desc">Manutenzione e ricarica climatizzatore con gas certificati R134a e R1234yf. Controllo perdite, pulizia e sanificazione circuito. Operatori certificati F-Gas secondo il D.Lgs. 26/2013.</p>
+                    <div class="svc-tag">Certificazione F-GAS</div>
                 </div>
+
+                <!-- VII -->
                 <div class="svc-card">
                     <span class="svc-num">VII</span>
-                    <h3 class="svc-name">Pneumatici</h3>
-                    <p class="svc-desc">Montaggio, bilanciatura dinamica e convergenza. Stock di pneumatici estivi, invernali e 4 stagioni delle principali marche per tutte le misure.</p>
-                    <div class="svc-tag">Cambio stagionale</div>
+                    <h3 class="svc-name">Impianti elettrici</h3>
+                    <p class="svc-desc">Riparazione degli impianti elettrici ed elettronici del veicolo. Cablaggi, sensori e componenti. Manutenzione alternatori e motorini di avviamento. Check dei sistemi di bordo per garantire il pieno funzionamento del veicolo.</p>
+                    <div class="svc-tag">Tutte le architetture</div>
                 </div>
+
+                <!-- VIII -->
                 <div class="svc-card">
                     <span class="svc-num">VIII</span>
-                    <h3 class="svc-name">Pre-revisione</h3>
-                    <p class="svc-desc">Ispezione in 40 punti prima della revisione ufficiale. Ogni criticità rilevata viene risolta prima di portare il veicolo alla motorizzazione.</p>
-                    <div class="svc-tag">Check 40 punti</div>
+                    <h3 class="svc-name">Pneumatici</h3>
+                    <p class="svc-desc">Montaggio, bilanciatura completa e cambio gomme con sensori TPMS. Stock di pneumatici estivi, invernali e 4 stagioni delle principali marche per tutte le misure.</p>
+                    <div class="svc-tag">Attrezzatura certificata</div>
                 </div>
+
+                <!-- IX -->
                 <div class="svc-card">
                     <span class="svc-num">IX</span>
-                    <h3 class="svc-name">Motore e trasmissione</h3>
-                    <p class="svc-desc">Revisione motore, cambio manuale e automatico, differenziale e catena cinematica. Interventi su prenotazione con ricambi di prima qualità.</p>
+                    <h3 class="svc-name">Controllo pre-revisione</h3>
+                    <p class="svc-desc">Verifica dei principali sistemi di sicurezza e delle anomalie da risolvere prima della presentazione alla motorizzazione. Ogni criticità rilevata viene corretta con ricambi di prima qualità.</p>
                     <div class="svc-tag">Su appuntamento dedicato</div>
                 </div>
+
             </div>
         </div>
     </section>
 
+    <!-- NUMBERS -->
     <div id="numbers">
         <div class="num-block reveal-el">
             <span class="num-big"><span class="counter" data-target="20">0</span><span class="num-suffix">+</span></span>
@@ -2438,16 +2364,17 @@
         </div>
         <div class="num-block reveal-el" style="transition-delay:.2s">
             <span class="num-big"><span class="counter" data-target="2500">0</span><span class="num-suffix">+</span></span>
-            <span class="num-label">Clienti seguiti</span>
-            <p class="num-desc">Privati, professionisti e aziende che ci affidano i loro veicoli ogni anno.</p>
+            <span class="num-label">Veicoli seguiti</span>
+            <p class="num-desc">Privati, professionisti e aziende che ci affidano i loro veicoli per le manutenzioni.</p>
         </div>
         <div class="num-block reveal-el" style="transition-delay:.3s">
             <span class="num-big"><span class="counter" data-target="3">0</span></span>
-            <span class="num-label">Ore per un tagliando</span>
+            <span class="num-label">Interventi programmati</span>
             <p class="num-desc">Tempi certi per ogni appuntamento programmato. Nessuna attesa indefinita.</p>
         </div>
     </div>
 
+    <!-- APPROCCIO -->
     <section id="approccio">
         <div class="approccio-grid">
             <div class="ap-left">
@@ -2513,6 +2440,7 @@
         </div>
     </section>
 
+    <!-- REVIEWS -->
     <section id="recensioni">
         <span class="s-eye reveal-el">Testimonianze</span>
         <h2 class="s-h2 reveal-el">I nostri <em>clienti</em></h2>
@@ -2566,6 +2494,7 @@
         </div>
     </section>
 
+    <!-- GALLERY -->
     <section id="galleria">
         <span class="s-eye reveal-el">Gli spazi</span>
         <h2 class="s-h2 reveal-el">L'officina <em>dall'interno</em></h2>
@@ -2579,6 +2508,7 @@
         </div>
     </section>
 
+    <!-- CHI SIAMO -->
     <section id="chi">
         <div class="chi-layout">
             <div class="chi-copy">
@@ -2608,6 +2538,7 @@
         </div>
     </section>
 
+    <!-- FAQ -->
     <section id="faq">
         <div class="faq-layout">
             <div>
@@ -2653,7 +2584,7 @@
             </div>
             <div class="faq-aside reveal-el">
                 <h3>Avete ancora<br><em>domande?</em></h3>
-                <p>Contattateci direttamente. Siamo a disposizione da lunedì a venerdì dalle 08:00 alle 18:30 e il sabato mattina fino alle 12:30.</p>
+                <p>Contattateci direttamente. Siamo a disposizione da lunedì a venerdì dalle 08:30 alle 19:30 e il sabato mattina fino alle 14:30.</p>
                 <div class="faq-btns">
                     <a href="tel:+393669907230" class="faq-btn">Chiamate ora</a>
                     <a href="https://wa.me/393669907230" class="faq-btn" target="_blank">Scrivete su WhatsApp</a>
@@ -2663,6 +2594,7 @@
         </div>
     </section>
 
+    <!-- CTA BAND -->
     <div id="band">
         <h2 class="band-title">Un problema alla vostra<br><em>auto?</em></h2>
         <div class="band-actions">
@@ -2671,6 +2603,7 @@
         </div>
     </div>
 
+    <!-- CONTACTS -->
     <section id="contatti">
         <div class="cnt-layout">
             <div class="cnt-details">
@@ -2709,14 +2642,15 @@
                     <label>Tipo di intervento</label>
                     <select>
                         <option value="">Selezionare il servizio…</option>
-                        <option>Tagliando ordinario</option>
-                        <option>Diagnosi elettronica</option>
-                        <option>Freni e sospensioni</option>
-                        <option>Distribuzione</option>
+                        <option>Manutenzione tecnica e tagliandi</option>
+                        <option>Diagnosi elettronica avanzata</option>
+                        <option>Freni, sospensioni e assetti</option>
+                        <option>Distribuzione e frizione</option>
+                        <option>Sistemi di iniezione e alimentazione</option>
                         <option>Climatizzazione</option>
-                        <option>Pre-revisione</option>
+                        <option>Impianti elettrici</option>
                         <option>Pneumatici</option>
-                        <option>Elettrauto</option>
+                        <option>Controllo pre-revisione</option>
                         <option>Altro</option>
                     </select>
                 </div>
@@ -2727,6 +2661,7 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer>
         <div class="ft-grid">
             <div>
@@ -2741,13 +2676,14 @@
             <div class="ft-col">
                 <h5>Servizi</h5>
                 <ul>
-                    <li><a href="#servizi-section">Tagliando</a></li>
+                    <li><a href="#servizi-section">Manutenzione e tagliandi</a></li>
                     <li><a href="#servizi-section">Diagnosi elettronica</a></li>
                     <li><a href="#servizi-section">Freni e sospensioni</a></li>
                     <li><a href="#servizi-section">Distribuzione</a></li>
+                    <li><a href="#servizi-section">Iniezione e alimentazione</a></li>
                     <li><a href="#servizi-section">Climatizzazione</a></li>
+                    <li><a href="#servizi-section">Impianti elettrici</a></li>
                     <li><a href="#servizi-section">Pneumatici</a></li>
-                    <li><a href="#servizi-section">Elettrauto</a></li>
                 </ul>
             </div>
             <div class="ft-col">
@@ -2782,9 +2718,8 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        /* ── CURSOR ── */
+        /* CURSOR */
         const dot = document.getElementById('c-dot');
         const ring = document.getElementById('c-ring');
         let mx = 0,
@@ -2809,7 +2744,7 @@
             el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
         });
 
-        /* ── SCROLL PROGRESS + NAV ── */
+        /* SCROLL PROGRESS + NAV */
         const prog = document.getElementById('prog');
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
@@ -2820,66 +2755,52 @@
             passive: true
         });
 
-        /* ── HERO INTRO ANIM ── */
+        /* HERO INTRO */
         window.addEventListener('load', () => {
+            setTimeout(() => document.getElementById('he').classList.add('show'), 200);
+            setTimeout(() => document.getElementById('hw1').classList.add('show'), 400);
+            setTimeout(() => document.getElementById('hw2').classList.add('show'), 580);
+            setTimeout(() => document.getElementById('hd').classList.add('show'), 900);
+            setTimeout(() => document.getElementById('hc').classList.add('show'), 1100);
             setTimeout(() => {
-                document.getElementById('he').classList.add('show');
-            }, 200);
-            setTimeout(() => {
-                document.getElementById('hw1').classList.add('show');
-            }, 400);
-            setTimeout(() => {
-                document.getElementById('hw2').classList.add('show');
-            }, 580);
-            setTimeout(() => {
-                document.getElementById('hd').classList.add('show');
-            }, 900);
-            setTimeout(() => {
-                document.getElementById('hc').classList.add('show');
-            }, 1100);
-            setTimeout(() => {
-                const badge = document.getElementById('hbadge');
-                if (badge) badge.classList.add('show');
+                const b = document.getElementById('hbadge');
+                if (b) b.classList.add('show');
             }, 1300);
-            [document.getElementById('hs1'), document.getElementById('hs2'),
-                document.getElementById('hs3'), document.getElementById('hs4')
-            ].forEach(el => {
+            [document.getElementById('hs1'), document.getElementById('hs2'), document.getElementById('hs3'), document.getElementById('hs4')].forEach(el => {
                 if (el) setTimeout(() => el.classList.add('show'), 1400);
             });
         });
-        /* ── MANIFESTO TEXT SPLIT ── */
+
+        /* MANIFESTO TEXT SPLIT */
         function splitWords(el) {
-            const text = el.innerText;
-            const words = text.split(' ');
+            const words = el.innerText.split(' ');
             el.innerHTML = words.map(w => `<span class="word"><span>${w}</span></span>`).join(' ');
         }
         const mtext = document.getElementById('mtext');
         if (mtext) splitWords(mtext);
 
-        /* ── INTERSECTION OBSERVER — reveal all .reveal-el ── */
+        /* INTERSECTION OBSERVER */
         const revObs = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (!e.isIntersecting) return;
-                const el = e.target;
-                el.classList.add('show');
-                el.querySelectorAll('.counter').forEach(c => animCounter(c));
-                revObs.unobserve(el);
+                e.target.classList.add('show');
+                e.target.querySelectorAll('.counter').forEach(c => animCounter(c));
+                revObs.unobserve(e.target);
             });
         }, {
             threshold: 0.12
         });
+        document.querySelectorAll('.reveal-el').forEach(el => revObs.observe(el));
 
-        document.querySelectorAll('.reveal-el').forEach(el => {
-            revObs.observe(el);
-        });
-
-        /* manifesto specific */
+        /* MANIFESTO */
         const mObs = new IntersectionObserver((entries) => {
             entries.forEach(e => {
                 if (!e.isIntersecting) return;
+                const lead = document.getElementById('mlead');
+                if (lead) setTimeout(() => lead.classList.add('show'), 100);
                 document.getElementById('mline').classList.add('show');
                 document.querySelectorAll('#mtext .word').forEach((w, i) => {
-                    setTimeout(() => w.classList.add('show'), i * 55);
+                    setTimeout(() => w.classList.add('show'), 100 + i * 55);
                 });
                 document.getElementById('msub').classList.add('show');
                 mObs.unobserve(e.target);
@@ -2890,7 +2811,7 @@
         const manSec = document.getElementById('manifesto');
         if (manSec) mObs.observe(manSec);
 
-        /* ── COUNTER ANIMATION ── */
+        /* COUNTER */
         function animCounter(el) {
             if (el.dataset.done === '1') return;
             el.dataset.done = '1';
@@ -2918,15 +2839,15 @@
         });
         document.querySelectorAll('.num-block').forEach(b => numObs.observe(b));
 
-        /* ── HORIZONTAL DRAG SCROLL ── */
+        /* HORIZONTAL DRAG SCROLL */
         const wrap = document.getElementById('svcWrap');
         const track = document.getElementById('svcTrack');
         let isDragging = false,
             startX = 0,
             scrollStart = 0,
             velX = 0,
-            lastX = 0;
-        let raf = null;
+            lastX = 0,
+            raf = null;
         wrap.addEventListener('mousedown', e => {
             isDragging = true;
             startX = e.pageX;
@@ -2987,7 +2908,7 @@
             });
         }
 
-        /* ── FAQ ── */
+        /* FAQ */
         function tFaq(btn) {
             const item = btn.closest('.faq-item');
             const was = item.classList.contains('open');
@@ -2995,7 +2916,7 @@
             if (!was) item.classList.add('open');
         }
 
-        /* ── MOBILE NAV ── */
+        /* MOBILE NAV */
         function toggleNav() {
             const l = document.querySelector('.nav-center');
             if (l.style.display === 'flex') {
@@ -3005,7 +2926,7 @@
             l.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:rgba(3,8,6,.97);padding:2rem clamp(2rem,6vw,6rem);gap:1.8rem;border-bottom:1px solid rgba(44,255,133,.15);z-index:7999;backdrop-filter:blur(24px)';
         }
 
-        /* ── FORM ── */
+        /* FORM */
         function doSub() {
             const s = document.getElementById('fsuc');
             s.style.display = 'block';
